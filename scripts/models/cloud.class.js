@@ -12,6 +12,6 @@ class Cloud extends MovableObject{
 animate() {
     setInterval(() => {
         this.x -= 0.15;
-    }, 1000/60)  //hier kommt, wie oft sich das wiederholen soll 
+    }, 1000/60)  
 }
 }
