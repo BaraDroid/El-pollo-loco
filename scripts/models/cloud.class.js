@@ -6,5 +6,12 @@ class Cloud extends MovableObject{
     constructor(){
         super().loadImage('img_pollo_locco/img/5_background/layers/4_clouds/1.png');
         this.x = Math.random()*700;
-    }
+        this.animate();
+}
+
+animate() {
+    setInterval(() => {
+        this.x -= 0.15;
+    }, 1000/60)  //hier kommt, wie oft sich das wiederholen soll 
+}
 }
