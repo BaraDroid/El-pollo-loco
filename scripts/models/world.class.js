@@ -15,6 +15,7 @@ class World {
     ];
     ctx;
     
+    
 
     constructor(canvas){
         this.ctx = canvas.getContext('2d');
