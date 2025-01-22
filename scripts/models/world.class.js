@@ -14,13 +14,20 @@ class World {
       new BackgroundObject('img_pollo_locco/img/5_background/layers/1_first_layer/1.png', 0, 0) 
     ];
     ctx;
+    keyboard;
     
     
 
-    constructor(canvas){
+    constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     draw() {
