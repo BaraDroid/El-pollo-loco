@@ -23,8 +23,9 @@ class MovableObject{
     }
 
     moveRight() {
-        console.log("moving right");
-    }
+
+        }
+    
 
     moveLeft() {
         setInterval(() => {
