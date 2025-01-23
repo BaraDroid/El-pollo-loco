@@ -35,15 +35,11 @@ class Character extends MovableObject {
                 this.otherDirection = true;
                 }
             this.world.camera_x = -this.x + 100;
-            }, 1000/60); 
-
-            
-        
-            
+            }, 1000/60);
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.x += this.speed;
+                //this.x += this.speed; das muss weg, sonst läuft er weiterhin, auch nach dem Ende, auch wenn das als "gegen Wind" erscheint
                 //walk animation
             let i = this.currentImage % this.IMAGES_WALKING.length;
             let path = this.IMAGES_WALKING[i];
