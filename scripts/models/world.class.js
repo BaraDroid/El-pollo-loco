@@ -51,13 +51,16 @@ class World {
     addToMap(movObj) {
         if (movObj.otherDirection) {
             this.ctx.save();    //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
-            this.ctx.translate(movObj.img.width, 0);//wir verändern die Methode, wie wir die Bilder einfügen
+            this.ctx.translate(movObj.width, 0);//wir verändern die Methode, wie wir die Bilder einfügen
             this.ctx.scale(-1, 1);//und das drehen wir alles um(die x Achse ist minus)
-        }
+            movObj.x = movObj.x * -1; //sonst fängt die x koordinate auch gespiegelt - also auf anderer Seite und Bild wird versetzt
+        }       //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
     this.ctx.drawImage(movObj.img, movObj.x, movObj.y, movObj.width, movObj.height);//jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
     
     if (movObj.otherDirection) {
+        movObj.x = movObj.x * -1;
         this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
+        
     }
 }
 }
