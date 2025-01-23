@@ -12,6 +12,7 @@ class Character extends MovableObject {
             'img_pollo_locco/img/2_character_pepe/2_walk/W-26.png'
     ];
     world;
+    walking_sound = new Audio('audio/footsteps.mp3');
 
     
 
@@ -38,9 +39,11 @@ class Character extends MovableObject {
             }, 1000/60);
 
         setInterval(() => {
+            this.walking_sound.pause();
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 //this.x += this.speed; das muss weg, sonst läuft er weiterhin, auch nach dem Ende, auch wenn das als "gegen Wind" erscheint
                 //walk animation
+                this.walking_sound.play();
             let i = this.currentImage % this.IMAGES_WALKING.length;
             let path = this.IMAGES_WALKING[i];
         this.img = this.imageCache[path];
