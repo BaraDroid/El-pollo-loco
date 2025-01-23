@@ -12,6 +12,7 @@ class Character extends MovableObject {
             'img_pollo_locco/img/2_character_pepe/2_walk/W-26.png'
     ];
     world;
+
     
 
     constructor(){
@@ -33,8 +34,10 @@ class Character extends MovableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
                 }
+            this.world.camera_x = -this.x;
             }, 1000/60); 
 
+            
         
             
 
