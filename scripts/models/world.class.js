@@ -49,6 +49,15 @@ class World {
     }
 
     addToMap(movObj) {
-    this.ctx.drawImage(movObj.img, movObj.x, movObj.y, movObj.width, movObj.height);
+        if (movObj.otherDirection) {
+            this.ctx.save();    //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
+            this.ctx.translate(movObj.img.width, 0);//wir verändern die Methode, wie wir die Bilder einfügen
+            this.ctx.scale(-1, 1);//und das drehen wir alles um(die x Achse ist minus)
+        }
+    this.ctx.drawImage(movObj.img, movObj.x, movObj.y, movObj.width, movObj.height);//jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
+    
+    if (movObj.otherDirection) {
+        this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
     }
+}
 }
