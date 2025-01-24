@@ -49,6 +49,13 @@ class World {
         }       //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
     this.ctx.drawImage(movObj.img, movObj.x, movObj.y, movObj.width, movObj.height);//jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
     
+            //HIER KOMMT DER RECHTECK, DASS WIR IHM DANACH JEDEM GEBEN KÖNNEN
+    this.ctx.beginPath();
+    this.ctx.lineWidth = "5";
+    this.ctx.strokeStyle = "blue";
+    this.ctx.rect(movObj.x, movObj.y, movObj.width, movObj.height);
+    this.ctx.stroke();
+
     if (movObj.otherDirection) {
         movObj.x = movObj.x * -1;
         this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
