@@ -23,10 +23,13 @@ class World {
     }
 
     checkCollisions() {
+        console.log("i'm checking collisions");
         setInterval(() => {
             this.level.enemies.forEach( (enemy) => {
                if (this.character.isColliding(enemy)) {
                 console.log('Collision with', enemy);
+                this.character.hit();
+                console.log(this.character.energy);
                }
             });
         }, 200);
@@ -59,6 +62,7 @@ class World {
     
             //HIER KOMMT DER RECHTECK, DASS WIR IHM DANACH JEDEM GEBEN KÖNNEN
         movObj.drawFrame(this.ctx);
+        movObj.drawOffsetFrame(this.ctx);
 
     if (movObj.otherDirection) {
         this.flipImageBack(movObj);

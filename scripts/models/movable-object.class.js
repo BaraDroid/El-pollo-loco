@@ -10,6 +10,13 @@ class MovableObject{
     otherDirection = false;
     speedY = 0;
     accelaration = 1;
+    energy = 100;
+    offset = {
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0
+    };
 
     applyGravity() {
         setInterval(() => {
@@ -34,7 +41,7 @@ class MovableObject{
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = "5";
             ctx.strokeStyle = "blue";
@@ -43,11 +50,32 @@ class MovableObject{
         }
     }
 
+    drawOffsetFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = "5";
+            ctx.strokeStyle = "red";
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
+            ctx.stroke();
+        }
+    }
+
     isColliding(movObj) {
-        return this.x + this.width > movObj.x &&
-        this.y + this.height > movObj.y &&
-        this.x < movObj.x &&
-        this.y < movObj.y + movObj.height;
+        return this.x + this.offset.left + this.width - this.offset.right > movObj.x + movObj.offset.left &&
+        this.y + this.offset.top + this.height - this.offset.bottom > movObj.y + movObj.offset.top &&
+        this.x + this.offset.left < movObj.x + movObj.offset.left &&
+        this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
+    }
+
+    hit() {
+        this.energy -= 2;
+        if (this.energy < 0) {
+            this.energy = 0     //es wird nicht weniger, es bleibt 0
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;    //falls Energie weg ist, gibt uns diese Funktion eine Null raus
     }
 
     loadImages(arr){

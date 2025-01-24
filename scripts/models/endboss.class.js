@@ -1,9 +1,13 @@
 class Endboss extends MovableObject {
     y = 55;
-    x = 500; //ich habe mir ausloggen lassen, wie viel sein x ist, bevor ich das überschrieben habe und angeblich 200, aber wovon das kommt = keine Ahnung
-    //und es will sich nich überschreiben lassen:-(
     height = 400;
     width = 250;
+    offset = {
+        top: 140,
+        bottom: 180,
+        left: 30,
+        right: 70
+    }
     IMAGES_WALKING = [
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -18,7 +22,7 @@ class Endboss extends MovableObject {
 
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.x = 200; //je größerer Zahl, desto weiter weg steht er
+        this.x = 1000; //je größerer Zahl, desto weiter weg steht er
         //this.speed = 0.01 + Math.random(); //falls das an ist, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
