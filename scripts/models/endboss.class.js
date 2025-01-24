@@ -1,5 +1,7 @@
 class Endboss extends MovableObject {
     y = 55;
+    x = 500; //ich habe mir ausloggen lassen, wie viel sein x ist, bevor ich das überschrieben habe und angeblich 200, aber wovon das kommt = keine Ahnung
+    //und es will sich nich überschreiben lassen:-(
     height = 400;
     width = 250;
     IMAGES_WALKING = [
