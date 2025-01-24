@@ -45,6 +45,10 @@ class MovableObject{
         this.currentImage++;
     }
 
+    jump() {
+        this.speedY = 30;
+    }
+
     moveRight() {
 
         }

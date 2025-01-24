@@ -1,7 +1,7 @@
 class Character extends MovableObject {
     height = 280;
     width = 130;
-    y = 80; //jetzt ist er in der Luft, urspr.Wert 153 (das steht er auf dem Boden)
+    y = 153;
     speed = 5;
     IMAGES_WALKING = [
         'img_pollo_locco/img/2_character_pepe/2_walk/W-21.png',
@@ -48,6 +48,13 @@ class Character extends MovableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
                 }
+
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.speedY = 15;   //wenn das 30 war, ist er weg von der canvas gesprungen
+                this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
+                console.log("pfeil oben gedrückt");
+                console.log(this.speedY);
+            }
             this.world.camera_x = -this.x + 100;
             }, 1000/60);
 
