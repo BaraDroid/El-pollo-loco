@@ -11,6 +11,7 @@ class MovableObject{
     speedY = 0;
     accelaration = 1;
     energy = 100;
+    lastHit = 0;
     offset = {
         top: 0,
         right: 0,
@@ -72,6 +73,15 @@ class MovableObject{
         if (this.energy < 0) {
             this.energy = 0     //es wird nicht weniger, es bleibt 0
         }
+        else {
+            this.lastHit = new Date().getTime(); //so speichert man Zeit in der Zahlenform, die vergangen sind seit 1.1.1970
+        }   //wenn wir dieser Zeit haben, können wir auch eine Zeitspanne messen
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit;   //difference in ms
+        timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
+        return timePassed < 1;  //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
     }
 
     isDead() {
