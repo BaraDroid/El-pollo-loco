@@ -42,24 +42,28 @@ class World {
 
     addToMap(movObj) {
         if (movObj.otherDirection) {
-            this.ctx.save();    //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
-            this.ctx.translate(movObj.width, 0);//wir verändern die Methode, wie wir die Bilder einfügen
-            this.ctx.scale(-1, 1);//und das drehen wir alles um(die x Achse ist minus)
-            movObj.x = movObj.x * -1; //sonst fängt die x koordinate auch gespiegelt - also auf anderer Seite und Bild wird versetzt
-        }       //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
-    this.ctx.drawImage(movObj.img, movObj.x, movObj.y, movObj.width, movObj.height);//jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
+            this.flipImage(movObj);
+        }
+        movObj.draw(this.ctx); //jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
     
             //HIER KOMMT DER RECHTECK, DASS WIR IHM DANACH JEDEM GEBEN KÖNNEN
-    this.ctx.beginPath();
-    this.ctx.lineWidth = "5";
-    this.ctx.strokeStyle = "blue";
-    this.ctx.rect(movObj.x, movObj.y, movObj.width, movObj.height);
-    this.ctx.stroke();
+        movObj.drawFrame(this.ctx);
 
     if (movObj.otherDirection) {
-        movObj.x = movObj.x * -1;
-        this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
+        this.flipImageBack(movObj);
         
     }
+}
+
+flipImage(movObj) {
+    this.ctx.save();    //erstmal speichern wir das aktuelle Kontext = die eingefüten Bilder
+    this.ctx.translate(movObj.width, 0);//wir verändern die Methode, wie wir die Bilder einfügen
+    this.ctx.scale(-1, 1);//und das drehen wir alles um(die x Achse ist minus)
+    movObj.x = movObj.x * -1; //sonst fängt die x koordinate auch gespiegelt - also auf anderer Seite und Bild wird versetzt //also drehen wir das mithilfe von -1, unten das gleiche, damit geben wir das zurück
+}
+
+flipImageBack(movObj) {
+    movObj.x = movObj.x * -1;
+        this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
 }
 }
