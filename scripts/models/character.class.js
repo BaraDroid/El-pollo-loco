@@ -1,7 +1,7 @@
 class Character extends MovableObject {
     height = 280;
     width = 130;
-    y = 153;
+    y = 80; //jetzt ist er in der Luft, urspr.Wert 153 (das steht er auf dem Boden)
     speed = 5;
     IMAGES_WALKING = [
         'img_pollo_locco/img/2_character_pepe/2_walk/W-21.png',
@@ -19,6 +19,7 @@ class Character extends MovableObject {
     constructor(){
         super().loadImage('img_pollo_locco/img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.applyGravity();
         this.animate();
     }
 
