@@ -75,8 +75,6 @@ class Character extends MovableObject {
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.speedY = 15;   //wenn das 30 war, ist er weg von der canvas gesprungen
                 this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
-                console.log("space gedrückt");
-                console.log(this.speedY);
             }
             this.world.camera_x = -this.x + 100;
             }, 1000/60);

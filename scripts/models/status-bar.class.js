@@ -10,7 +10,13 @@ class StatusBar extends DrawableObject {
     percentage = 100; //standardm#ßig hundert, dass sich das immer reduziert
 
     constructor () {
+        super();
         this.loadImages(this.IMAGES_HEALTHBAR);
+        this.x = 25;
+        this.y = 0;
+        this.width = 250;
+        this.height = 65;
+        this.setPercentage(100);
     }
 
     setPercentage(percentage) { //damit können wir von außen unser percentage setzen
