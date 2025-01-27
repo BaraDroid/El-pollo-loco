@@ -1,7 +1,8 @@
 class Character extends MovableObject {
+    x = 120;
+    y = 153;
     height = 280;
     width = 130;
-    y = 153;
     speed = 5;
     offset = {
         top: 120,
