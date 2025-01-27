@@ -1,5 +1,5 @@
 class StatusBar extends DrawableObject {
-    IMAGES_HEALTHBAR = [
+    IMAGES_BAR = [
         'img_pollo_locco/img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
         'img_pollo_locco/img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
         'img_pollo_locco/img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
@@ -11,7 +11,7 @@ class StatusBar extends DrawableObject {
 
     constructor () {
         super();
-        this.loadImages(this.IMAGES_HEALTHBAR);
+        this.loadImages(this.IMAGES_BAR);
         this.x = 25;
         this.y = 0;
         this.width = 250;
@@ -21,24 +21,25 @@ class StatusBar extends DrawableObject {
 
     setPercentage(percentage) { //damit können wir von außen unser percentage setzen
         this.percentage = percentage;  //aus dieser Zahl müssen wir eine Zahl zw. 0 und 5 kriegen//geht bestimmt mit viel Mathematik, er nimmt die leichteste Methode und das ist if Abfrage
-        let imagePath = this.IMAGES_HEALTHBAR[this.receiveImageIndex()];
+        let imagePath = this.IMAGES_BAR[this.receiveImageIndex()];
         this.img = this.imageCache[imagePath];
     }
 
+
     receiveImageIndex() {
-        if (this.percentage == 100) {
+        if (this.percentage == 100 || this.percentage > 90) {
             return 5;
         }
-        else if (this.percentage > 80) {
+        else if (this.percentage >= 80) {
             return 4;
         }
-        else if (this.percentage > 60) {
+        else if (this.percentage >= 60) {
             return 3;
         }
-        else if (this.percentage > 40) {
+        else if (this.percentage >= 40) {
             return 2;
         }
-        else if (this.percentag > 20) {
+        else if (this.percentage >= 20) {
             return 1;
         }
         else {
