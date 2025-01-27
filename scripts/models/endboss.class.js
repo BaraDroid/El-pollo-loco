@@ -3,10 +3,10 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     offset = {
-        top: 140,
-        bottom: 180,
-        left: 30,
-        right: 70
+        top: 100,
+        bottom: 130,
+        left: 37,
+        right: 40
     }
     IMAGES_WALKING = [
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png',
