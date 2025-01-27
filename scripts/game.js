@@ -23,7 +23,10 @@ window.addEventListener('keydown', (event) => {
         keyboard.UP = true;
     }
     if (event.keyCode == 40) {
-        keyboard.DOWN = true
+        keyboard.DOWN = true;
+    }
+    if (event.keyCode == 68) {
+        keyboard.D = true;
     }
 });
 
@@ -42,5 +45,8 @@ window.addEventListener('keyup', (event) => {
     }
     if (event.keyCode == 40) {
         keyboard.DOWN = false;
+    }
+    if (event.keyCode == 68) {
+        keyboard.D = false;
     }
 });
