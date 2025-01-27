@@ -1,3 +1,8 @@
+@font-face {
+    font-family: HVD_Comic_Serif_Pro;
+    src: url(./fonts/HVD_Comic_Serif_Pro.otf);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -5,6 +10,7 @@ body {
     background-image: url(./img_pollo_locco/img/bg_images/3ef226d7-8082-4d4a-b672-81809f508787.webp);
     background-size: cover;
     background-position: center;
+    font-family: HVD_Comic_Serif_Pro;
 }
 
 canvas {
