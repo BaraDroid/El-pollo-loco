@@ -2,7 +2,7 @@ class ThrowableObject extends MovableObject{
     height = 60;
     width = 60;
     accelaration = 5;
-    bottleBroke = new Audio('audio/glass_broken.mp3')
+    bottle_broke = new Audio('audio/glass_broken.mp3')
 
     IMAGES_THROWN = [
         'img_pollo_locco/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -17,6 +17,7 @@ constructor(x, y) {
     this.x = x;
     this.y = y;
     this.throw();
+    this.addBottleSound();
 }
 
 throw() {
@@ -27,6 +28,11 @@ throw() {
         this.x += 25;
     }, 1000/15);
     
+}
+
+addBottleSound() {
+    this.bottle_broke.play();
+    console.log("abgespielt");
 }
 
 }
