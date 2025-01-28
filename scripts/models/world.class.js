@@ -9,7 +9,29 @@ class World {
     coinBar = new Coinsbar();
     bottleBar = new Bottlesbar();
     throwableObject = [];
-    collectableObject = new CollectableObject();
+    collectableObject = [
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+        new CollectableObject(this.level),
+    ];
     
 
     constructor(canvas, keyboard){
@@ -57,7 +79,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObject);
-        this.addToMap(this.collectableObject);
+        this.addObjectsToMap(this.collectableObject);
 
         this.ctx.translate(-this.camera_x, 0);
         //-------space for fixed objects:--------
