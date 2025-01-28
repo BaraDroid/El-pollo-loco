@@ -6,9 +6,9 @@ class Character extends MovableObject {
     speed = 5;
     offset = {
         top: 120,
-        bottom: 135,
+        bottom: 145,
         left: 30,
-        right: 50
+        right: 60
     }
     IMAGES_WALKING = [
         'img_pollo_locco/img/2_character_pepe/2_walk/W-21.png',
@@ -63,7 +63,7 @@ class Character extends MovableObject {
     animate(){
         
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if (this.world.keyboard.RIGHT && this.x < Level.level_end_x) {
             this.x += this.speed;
             this.otherDirection = false;    //in welche Richtung er gespiegelt wird
             }

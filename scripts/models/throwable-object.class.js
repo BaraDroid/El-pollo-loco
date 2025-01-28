@@ -17,7 +17,6 @@ constructor(x, y) {
     this.x = x;
     this.y = y;
     this.throw();
-    this.addBottleSound();
 }
 
 throw() {

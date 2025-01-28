@@ -8,30 +8,26 @@ class World {
     statusBar = new StatusBar();
     coinBar = new Coinsbar();
     bottleBar = new Bottlesbar();
-    throwableObject = [];
-    collectableObject = [
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
-        new CollectableObject(this.level),
+    throwableObjects = [];
+    collectableObjects = [
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
+        new CollectableObject(),
     ];
+    picking_sounds = {
+        bottle_picking : new Audio('audio/glass_short.mp3')
+    };
     
 
     constructor(canvas, keyboard){
@@ -51,16 +47,29 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollisionsWithCollectables();
             this.checkThrownObjects();
         }, 200);
     }
 
     checkThrownObjects() {
-        if(this.keyboard.D) {
+        if(this.keyboard.D && this.throwableObjects.length > 0) {
+            console.log(this.throwableObjects.length);
             let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
-            this.throwableObject.push(bottle);
+            this.throwableObjects.push(bottle);
+            console.log(this.throwableObjects.length);
+            this.throwableObjects.splice(0,2);
+            console.log(this.throwableObjects.length);
         }
     }
+
+    checkCollisionsWithCollectables() {
+        this.collectableObjects.forEach((obj) => {
+            if (this.character.isCollidingWithBottle(obj)) {
+                obj.y = 500;
+                this.throwableObjects.push(new ThrowableObject());
+            }});
+        }
 
     checkCollisions() {
     this.level.enemies.forEach((enemy) => {
@@ -78,10 +87,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.throwableObject);
-        this.addObjectsToMap(this.collectableObject);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.collectableObjects);
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);  //moves camera with character
         //-------space for fixed objects:--------
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
