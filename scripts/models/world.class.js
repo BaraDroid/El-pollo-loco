@@ -9,6 +9,7 @@ class World {
     coinBar = new Coinsbar();
     bottleBar = new Bottlesbar();
     throwableObject = [];
+    collectableObject = new CollectableObject();
     
 
     constructor(canvas, keyboard){
@@ -56,6 +57,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObject);
+        this.addToMap(this.collectableObject);
 
         this.ctx.translate(-this.camera_x, 0);
         //-------space for fixed objects:--------
