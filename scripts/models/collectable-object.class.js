@@ -21,15 +21,16 @@ class CollectableObject extends DrawableObject {
     constructor(level) {
         super().loadImage(this.IMAGES_BOTTLES_ONGROUND[this.getBottleImage()]);
         this.level = level;
-        this.distributeCollectables() //das ist richtig, auch wenn das unterstrichen ist
+        this.distributeCollectables();
         this.getBottleImage();
-        //this.pickBottle();
     }
 
     distributeCollectables() {
-        this.x = Level.level_end_x - Math.random()*2800;
+        this.x = Level.level_end_x - Math.random()*2800;    //x liegt auf dem ganzen Bereich vom ersten Level, wo Pepe rumlaufen kann
+        this.y = 340 + Math.random() * (400-340);   //y liegt zwischen 350 und 400 px
     }
 
+    //get random image from array
     getBottleImage() {
         let randomIndex = Math.floor(Math.random()*2);
         return randomIndex;
