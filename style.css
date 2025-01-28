@@ -8,11 +8,20 @@ body {
     flex-direction: column;
     align-items: center;
     background-image: url(./img_pollo_locco/img/bg_images/3ef226d7-8082-4d4a-b672-81809f508787.webp);
-    background-size: cover;
+   
     background-position: center;
     font-family: HVD_Comic_Serif_Pro;
 }
 
 canvas {
     background-color: black;
+}
+
+h1 {
+    font-size: 80px;
+    margin-bottom: 8px;
+    color: rgb(132 9 42);
+    -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: rgb(250, 247, 221);
+  text-shadow: 12px 12px 12px rgb(207, 20, 70);
 }
