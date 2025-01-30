@@ -20,8 +20,8 @@ constructor() {
     setPercentage(percent) { //damit können wir von außen unser percentage setzen
         percent = World.collectedBottles * 100/14;  //aus dieser Zahl müssen wir eine Zahl zw. 0 und 5 kriegen//geht bestimmt mit viel Mathematik, er nimmt die leichteste Methode und das ist if Abfrage
         let imagePath = this.IMAGES_BAR[this.receiveImageIndex(percent)];
-        console.log(World.collectedBottles);
-        console.log(percent);
+        // console.log(World.collectedBottles);
+        // console.log(percent);
         this.img = this.imageCache[imagePath];
     }
 

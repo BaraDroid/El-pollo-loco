@@ -79,6 +79,28 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitWithBottle() {
+        this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Leben weg
+            if (World.bottle.isColliding(enemy)) {
+                if (enemy instanceof Chicken) {
+                    enemy.energy -= 5;
+                }
+                else if (enemy instanceof Endboss) {
+                    enemy.energy -= 100 / 7;
+                }
+                else if (enemy instanceof Babychicken) {
+                    enemy.energy -= 1;
+                }
+            }
+        });
+    
+        // if (this.energy < 0) {
+        //     this.energy = 0;
+        // } else {
+        //     this.lastHit = new Date().getTime();
+        // }
+    }
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;   //difference in ms
         timePassed = timePassed / 1000; //damit kriegen wir sekundenraus

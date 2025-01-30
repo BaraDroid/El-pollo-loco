@@ -71,6 +71,7 @@ class World {
             this.checkCollisions();
             this.checkCollisionsWithCollectableBottles();
             this.checkThrownObjects();
+            //this.checkCollisionsWithThrowableBottles();
         }, 200);
     }
 
@@ -95,13 +96,24 @@ class World {
     checkCollisions() {
     this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
-         console.log('Collision with', enemy);
+         //console.log('Collision with', enemy);
          this.character.hit();
-         console.log(this.character.energy);
+         //console.log(this.character.energy);
          this.statusBar.setPercentage(this.character.energy);
         }
     });
     }
+
+    checkCollisionsWithThrowableBottles() {
+        this.level.enemies.forEach((enemy) => {
+            if (World.bottle.isColliding(enemy)) {
+             console.log('Bottle on', enemy);
+             this.enemy.hitWithBottle();
+             console.log("Enemy hitted!")
+             //this.statusBar.setPercentage(this.character.energy);
+            }
+        });
+        }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
