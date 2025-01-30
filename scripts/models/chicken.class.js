@@ -2,6 +2,7 @@ class Chicken extends MovableObject {
     y = 330;
     height = 100;
     width = 100;
+    energy = 10;
     offset = {
         top: 10,
         bottom: 20,

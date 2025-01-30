@@ -4,7 +4,7 @@ class World {
     canvas;
     ctx;
     keyboard;
-    bottle;
+    static bottle;
     static collectedBottles = 0;
     camera_x = 0; //sonst starten wir in der Mitte
     statusBar = new StatusBar();
@@ -69,21 +69,21 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkCollisionsWithCollectables();
+            this.checkCollisionsWithCollectableBottles();
             this.checkThrownObjects();
         }, 200);
     }
 
     checkThrownObjects() {
         if(this.keyboard.D && World.collectedBottles > 0) {
-            this.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
-            World.throwableObjects.push(this.bottle);
+            World.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
+            World.throwableObjects.push(World.bottle);
             World.collectedBottles--;
             this.bottleBar.setPercentage(World.collectedBottles);
         }
     }
 
-    checkCollisionsWithCollectables() {
+    checkCollisionsWithCollectableBottles() {
         this.collectableObjects.forEach((obj) => {
             if (this.character.isColliding(obj)) {
                 obj.y = 500;

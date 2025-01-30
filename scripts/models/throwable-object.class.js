@@ -23,6 +23,7 @@ constructor(x, y) {
     this.x = x;
     this.y = y;
     this.throw();
+    this.hit();
 }
 
 throw() {
@@ -33,6 +34,31 @@ throw() {
         this.x += 25;
     }, 1000/15);
     
+}
+
+hit() {
+    console.log("method hit funktioniert");
+    let salsaBottle = World.throwableObjects;
+    salsaBottle.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Leben weg
+        if (salsaBottle.isColliding(enemy)) {
+            if (enemy instanceof Chicken) {
+                enemy.energy -= 10;
+            }
+            else if (enemy instanceof Endboss) {
+                console.log("ich schlage den endboss!");
+                enemy.energy -= 100 / 7;
+            }
+            else if (enemy instanceof Babychicken) {
+                enemy.energy -= 5;
+            }
+        }
+    });
+
+    // if (this.energy < 0) {
+    //     this.energy = 0;
+    // } else {
+    //     this.lastHit = new Date().getTime();
+    // }
 }
 
 }

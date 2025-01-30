@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
     y = 55;
     height = 400;
     width = 250;
+    energy = 100;
     offset = {
         top: 100,
         bottom: 130,
@@ -22,14 +23,12 @@ class Endboss extends MovableObject {
     ];
     
 
-    constructor(thrownBottle){
+    constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.thrownBottle = thrownBottle;   //hier ist es undefined
         this.x = 300; //je größerer Zahl, desto weiter weg steht er
         //this.speed = 0.01 + Math.random(); //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
-       //this.endbossHit();
     }
 
     animate(){
@@ -41,8 +40,8 @@ class Endboss extends MovableObject {
         }, 1000/3); 
     }
 
-    // endbossHit() {
-    //         if (this.isColliding(this.world.throwableObjects)) {
+    // endbossHit(thrownObject) {
+    //         if (this.isColliding(thrownObject)) {
     //                 this.energy -= 100 / 7;
     //                 console.log(this.energy);
     //         }
@@ -53,5 +52,18 @@ class Endboss extends MovableObject {
         //     //hier wird die Endanimation abgespielt
         // } else {
         //     this.lastHit = new Date().getTime();
+        // }
+
+        // hitByBottle() {
+        //         if (this.isColliding(World.bottle)) {
+        //             if (World.bottle instanceof ThrowableObject) {
+        //                 this.energy -= 100 / 7;
+        //             }
+        //         }
+        //     if (this.energy < 0) {
+        //         this.energy = 0;
+        //     } else {
+        //         this.lastHit = new Date().getTime();
+        //     }
         // }
     }

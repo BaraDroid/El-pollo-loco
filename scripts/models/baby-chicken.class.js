@@ -2,6 +2,7 @@ class Babychicken extends Chicken {
     y = 385;
     height = 50;
     width = 50;
+    energy = 5;
     offset = {
         top: 10,
         bottom: 20,
