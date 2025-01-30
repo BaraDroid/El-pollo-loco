@@ -6,10 +6,12 @@ class World {
     keyboard;
     static bottle;
     static collectedBottles = 0;
+    collectedCoins = 0;
     camera_x = 0; //sonst starten wir in der Mitte
     statusBar = new StatusBar();
     coinBar = new Coinsbar();
     bottleBar = new Bottlesbar();
+    chickenStatusBar = new Chickenstatus();
     static throwableObjects = [];
     collectableObjects = [
         new CollectableObject(),
@@ -27,7 +29,7 @@ class World {
         new CollectableObject(),
         new CollectableObject(),
     ];
-    coins = [
+    coins = [   //20 Stück
         new Coins(),
         new Coins(),
         new Coins(),
@@ -71,6 +73,7 @@ class World {
             this.checkCollisions();
             this.checkCollisionsWithCollectableBottles();
             this.checkThrownObjects();
+            this.checkCollisionsWithCoins()
             //this.checkCollisionsWithThrowableBottles();
         }, 200);
     }
@@ -115,6 +118,16 @@ class World {
         });
         }
 
+        checkCollisionsWithCoins() {
+            this.coins.forEach((coin) => {
+                if (this.character.isColliding(coin)) {
+                    coin.y = 500;
+                    this.collectedCoins++;
+                 this.coinBar.setPercentage(this.collectedCoins*5);
+                }
+            });
+            }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -126,6 +139,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);  //moves camera with character
         //-------space for fixed objects:--------
+        this.addToMap(this.chickenStatusBar);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);

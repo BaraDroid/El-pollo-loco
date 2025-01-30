@@ -32,7 +32,6 @@ throw() {
         this.playAnimation(this.IMAGES_THROWN);
         this.x += 25;
     }, 1000/15);
-    
 }
 
 }
