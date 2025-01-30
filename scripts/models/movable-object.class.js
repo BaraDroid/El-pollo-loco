@@ -79,26 +79,15 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    hitWithBottle() {
-        this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Leben weg
-            if (World.bottle.isColliding(enemy)) {
-                if (enemy instanceof Chicken) {
-                    enemy.energy -= 5;
-                }
-                else if (enemy instanceof Endboss) {
-                    enemy.energy -= 100 / 7;
-                }
-                else if (enemy instanceof Babychicken) {
-                    enemy.energy -= 1;
-                }
+    enemyIsHit() {
+            if (this.isColliding(objekt)) {
+                this.energy -= 100 / 7;
             }
-        });
-    
-        // if (this.energy < 0) {
-        //     this.energy = 0;
-        // } else {
-        //     this.lastHit = new Date().getTime();
-        // }
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
     }
 
     isHurt() {
@@ -131,6 +120,10 @@ class MovableObject extends DrawableObject {
         setInterval(() => {
             this.x -= this.speed;
             }, 1000/60); 
+    }
+
+    isSleepy() {
+        
     }
 
 }
