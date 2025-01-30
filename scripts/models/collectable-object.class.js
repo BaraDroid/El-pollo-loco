@@ -4,8 +4,6 @@ class CollectableObject extends DrawableObject {
     height = 60;
     width = 80;
     level;
-
-    
     offset = {
         top: 10,
         bottom: 20,
@@ -21,14 +19,14 @@ class CollectableObject extends DrawableObject {
     constructor(level) {
         super().loadImage(this.IMAGES_BOTTLES_ONGROUND[this.getBottleImage()]);
         this.level = level;
-        this.distributeCollectables();
+        this.distributeBottles();
         this.getBottleImage();
     }
 
-    distributeCollectables() {
+    distributeBottles() {
         //this.x = Level.level_end_x - Math.random()*2800;    //x liegt auf dem ganzen Bereich vom ersten Level, wo Pepe rumlaufen kann
         this.x = Math.max(100, Level.level_end_x - Math.random() * Level.level_end_x);
-        this.y = 340 + Math.random() * (400-340);   //y liegt zwischen 350 und 400 px
+        this.y = 342 + Math.random() * (400-342);   //y liegt zwischen 342 und 400 px
     }
 
     //get random image from array

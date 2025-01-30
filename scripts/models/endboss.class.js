@@ -8,6 +8,8 @@ class Endboss extends MovableObject {
         left: 37,
         right: 40
     }
+
+
     IMAGES_WALKING = [
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -20,12 +22,14 @@ class Endboss extends MovableObject {
     ];
     
 
-    constructor(){
+    constructor(thrownBottle){
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.x = 200; //je größerer Zahl, desto weiter weg steht er
-        //this.speed = 0.01 + Math.random(); //falls das an ist, bewegt er sich nach vorn
+        this.thrownBottle = thrownBottle;   //hier ist es undefined
+        this.x = 300; //je größerer Zahl, desto weiter weg steht er
+        //this.speed = 0.01 + Math.random(); //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
+       //this.endbossHit();
     }
 
     animate(){
@@ -36,4 +40,18 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
         }, 1000/3); 
     }
-}
+
+    // endbossHit() {
+    //         if (this.isColliding(this.world.throwableObjects)) {
+    //                 this.energy -= 100 / 7;
+    //                 console.log(this.energy);
+    //         }
+    //     };
+    
+        // if (this.energy < 0) {
+        //     this.energy = 0;
+        //     //hier wird die Endanimation abgespielt
+        // } else {
+        //     this.lastHit = new Date().getTime();
+        // }
+    }

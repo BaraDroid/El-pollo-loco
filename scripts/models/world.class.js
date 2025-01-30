@@ -4,12 +4,13 @@ class World {
     canvas;
     ctx;
     keyboard;
+    bottle;
     static collectedBottles = 0;
     camera_x = 0; //sonst starten wir in der Mitte
     statusBar = new StatusBar();
     coinBar = new Coinsbar();
     bottleBar = new Bottlesbar();
-    throwableObjects = [];
+    static throwableObjects = [];
     collectableObjects = [
         new CollectableObject(),
         new CollectableObject(),
@@ -25,6 +26,28 @@ class World {
         new CollectableObject(),
         new CollectableObject(),
         new CollectableObject(),
+    ];
+    coins = [
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins()
     ];
     
     
@@ -53,8 +76,8 @@ class World {
 
     checkThrownObjects() {
         if(this.keyboard.D && World.collectedBottles > 0) {
-            let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
-            this.throwableObjects.push(bottle);
+            this.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
+            World.throwableObjects.push(this.bottle);
             World.collectedBottles--;
             this.bottleBar.setPercentage(World.collectedBottles);
         }
@@ -62,7 +85,7 @@ class World {
 
     checkCollisionsWithCollectables() {
         this.collectableObjects.forEach((obj) => {
-            if (this.character.isCollidingWithBottle(obj)) {
+            if (this.character.isColliding(obj)) {
                 obj.y = 500;
                 World.collectedBottles++;
                 this.bottleBar.setPercentage(World.collectedBottles);
@@ -85,8 +108,9 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(World.throwableObjects);
         this.addObjectsToMap(this.collectableObjects);
+        this.addObjectsToMap(this.coins);
 
         this.ctx.translate(-this.camera_x, 0);  //moves camera with character
         //-------space for fixed objects:--------

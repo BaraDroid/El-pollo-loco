@@ -10,7 +10,6 @@ class Bottlesbar extends StatusBar{
     ];
 
 constructor() {
-        
         super().loadImage('img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png');
         this.loadImages(this.IMAGES_BAR);
         this.y = 125;
@@ -30,16 +29,16 @@ constructor() {
         if (percent == 100 || percent > 90) {
             return 5;
         }
-        else if (percent >= 80) {
+        else if (percent >= 78) {
             return 4;
         }
-        else if (percent >= 60) {
+        else if (percent >= 50) {
             return 3;
         }
-        else if (percent >= 40) {
+        else if (percent >= 42) {
             return 2;
         }
-        else if (percent >= 20) {
+        else if (percent >= 21) {
             return 1;
         }
         else {
