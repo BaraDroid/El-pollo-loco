@@ -17,7 +17,7 @@ class Babychicken extends Chicken {
 
     constructor() {
         super().loadImage('img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
-        this.x = 720 + Math.random()*500;
+        //this.x = 720 + Math.random()*500;
         this.speed = 0.17 + Math.random()*0.5;
         this.loadImages(this.IMAGES_WALKING);
         this.animate();

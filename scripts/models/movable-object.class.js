@@ -45,14 +45,45 @@ class MovableObject extends DrawableObject {
         this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
     }
 
+    // hit() {
+    //     if (this.isColliding (new Chicken())) {
+    //         this.energy -= 3;
+    //     }
+    //     else if (this.isColliding (new Endboss())) {
+    //         this.energy -= 5;
+    //     }
+    //     else if (this.isColliding (new Babychicken())) {
+    //         this.energy -=1
+    //     }
+        
+    //     if (this.energy < 0) {
+    //         this.energy = 0     //es wird nicht weniger, es bleibt 0
+    //     }
+    //     else {
+    //         this.lastHit = new Date().getTime(); //so speichert man Zeit in der Zahlenform, die vergangen sind seit 1.1.1970
+    //     }   //wenn wir dieser Zeit haben, können wir auch eine Zeitspanne messen
+    // }
+
     hit() {
-        this.energy -= 2;
+        this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Leben weg
+            if (this.isColliding(enemy)) {
+                if (enemy instanceof Chicken) {
+                    this.energy -= 3;
+                }
+                else if (enemy instanceof Endboss) {
+                    this.energy -= 5;
+                }
+                else if (enemy instanceof Babychicken) {
+                    this.energy -= 1;
+                }
+            }
+        });
+    
         if (this.energy < 0) {
-            this.energy = 0     //es wird nicht weniger, es bleibt 0
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
-        else {
-            this.lastHit = new Date().getTime(); //so speichert man Zeit in der Zahlenform, die vergangen sind seit 1.1.1970
-        }   //wenn wir dieser Zeit haben, können wir auch eine Zeitspanne messen
     }
 
     isHurt() {

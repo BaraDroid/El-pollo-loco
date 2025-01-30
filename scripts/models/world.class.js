@@ -4,6 +4,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    static collectedBottles = 0;
     camera_x = 0; //sonst starten wir in der Mitte
     statusBar = new StatusBar();
     coinBar = new Coinsbar();
@@ -25,9 +26,7 @@ class World {
         new CollectableObject(),
         new CollectableObject(),
     ];
-    picking_sounds = {
-        bottle_picking : new Audio('audio/glass_short.mp3')
-    };
+    
     
 
     constructor(canvas, keyboard){
@@ -53,13 +52,10 @@ class World {
     }
 
     checkThrownObjects() {
-        if(this.keyboard.D && this.throwableObjects.length > 0) {
-            console.log(this.throwableObjects.length);
+        if(this.keyboard.D && World.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
             this.throwableObjects.push(bottle);
-            console.log(this.throwableObjects.length);
-            this.throwableObjects.splice(0,2);
-            console.log(this.throwableObjects.length);
+            World.collectedBottles--;
         }
     }
 
@@ -67,7 +63,8 @@ class World {
         this.collectableObjects.forEach((obj) => {
             if (this.character.isCollidingWithBottle(obj)) {
                 obj.y = 500;
-                this.throwableObjects.push(new ThrowableObject());
+                World.collectedBottles++;
+                this.bottleBar.setPercentage(World.collectedBottles);
             }});
         }
 
