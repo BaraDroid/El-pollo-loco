@@ -26,7 +26,7 @@ class Endboss extends MovableObject {
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
         this.x = 350; //je größerer Zahl, desto weiter weg steht er
-        //this.speed = 0.01 + Math.random(); //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
+        //this.speed = 0.1 + Math.random(); //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
     }

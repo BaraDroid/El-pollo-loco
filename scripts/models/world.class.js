@@ -59,7 +59,6 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
     this.run();
   }
 
@@ -73,20 +72,16 @@ class World {
       this.checkCollisionsWithCollectableBottles();
       this.checkThrownObjects();
       this.checkCollisionsWithCoins();
-      
+      this.checkCollisionsWithThrowableBottles();
     }, 200);
   }
 
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
-      World.bottle = new ThrowableObject(
-        this.character.x + 90,
-        this.character.y + 110
-      );
+      World.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
       World.throwableObjects.push(World.bottle);
       World.collectedBottles--;
       this.bottleBar.setPercentage(World.collectedBottles);
-      this.checkCollisionsWithThrowableBottles(World.bottle);
     }
   }
 
@@ -112,17 +107,18 @@ class World {
   }
 
   checkCollisionsWithThrowableBottles() {
-    if (World.collectedBottles > 0) {
-      this.level.enemies.forEach((enemy) => {
-        if (World.bottle.isColliding(enemy)) {
-          console.log("Ich habe" + enemy + "getroffen");
-          this.enemy.hitWithBottle();
-          console.log("Enemy hitted!");
-          //this.statusBar.setPercentage(this.character.energy);
-        }
-      });
+    if (World.throwableObjects.length > 0) {
+        this.level.enemies.forEach((enemy) => {
+            if (World.throwableObjects[0].isColliding(enemy)) {
+                enemy.hitWithBottle();
+                console.log("Enemy hitted!");
+                //this.statusBar.setPercentage(this.character.energy);
+            }
+        });
     }
-  }
+}
+
+
 
   checkCollisionsWithCoins() {
     this.coins.forEach((coin) => {
