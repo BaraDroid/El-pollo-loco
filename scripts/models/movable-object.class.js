@@ -52,9 +52,7 @@ class MovableObject extends DrawableObject {
         this.y < movObj.y + movObj.height;
      }
 
-     hitWithBottle(hittedEnemy){
-        console.log("Getroffen mit der Flasche!");
-     }
+
     // hit() {
     //     if (this.isColliding (new Chicken())) {
     //         this.energy -= 3;
@@ -96,16 +94,22 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    enemyIsHit() {
-            if (this.isColliding(objekt)) {
-                this.energy -= 100 / 7;
-            }
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+    hitWithBottle(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
+        if (hittedEnemy instanceof Chicken) {
+            World.chicken.energy -= 3;
         }
-    }
+        else if (hittedEnemy instanceof Babychicken) {
+            World.chicken.energy -= 1;
+        }
+        else if (hittedEnemy instanceof Endboss) {
+            World.chicken.energy -= 5;
+        }
+        if (World.chicken.energy <0) {
+            World.chicken.energy = 0;
+        }
+        console.log(World.chicken.energy);
+     }
+
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;   //difference in ms

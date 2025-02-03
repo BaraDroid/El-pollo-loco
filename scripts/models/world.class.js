@@ -1,12 +1,12 @@
 class World {
   character = new Character();
   level = level1;
+  static chicken = new Chicken();
   canvas;
   ctx;
   keyboard;
   static bottle;
   static collectedBottles = 0;
-  pepeThrows = false;
   collectedCoins = 0;
   camera_x = 0; //sonst starten wir in der Mitte
   statusBar = new StatusBar();
@@ -69,23 +69,20 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkCollisions();
-      this.checkCollisionsWithCollectableBottles();
-      this.checkThrownObjects();
-      this.checkCollisionsWithCoins();
-      this.checkCollisionsWithThrowableBottles();
+      this.checkCollisions();   //check, if an enemy touch Pepe
+      this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
+      this.checkThrownObjects();    //method to throw bottles
+      this.checkCollisionsWithCoins();  //check collectiong of golden coins
+      this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
+      //this.checkCollisionWithJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
     }, 200);
   }
 
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
       World.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
-      this.pepeThrows = true;
-      console.log(this.pepeThrows);
       World.throwableObjects.push(World.bottle);
       World.collectedBottles--;
-      this.pepeThrows = false;
-      console.log(this.pepeThrows);
       this.bottleBar.setPercentage(World.collectedBottles);
     }
   }
@@ -111,36 +108,22 @@ class World {
     });
   }
 
-//   checkCollisionsWithThrowableBottles() {
-//     if (World.throwableObjects.length > 0) {
-//         this.level.enemies.forEach((enemy) => {
-//             if (World.throwableObjects[0].isColliding(enemy)) {
-//                 enemy.hitWithBottle(enemy);
-//                 console.log("Enemy hitted!");
-//                 //this.statusBar.setPercentage(this.character.energy);
-//             }
-//         });
-//     }
-// }
-
-checkCollisionsWithThrowableBottles() {
-   // if (this.pepeThrows == true) {
+checkCollisionsWithThrowableBottles() { 
         console.log("flasche geworfen");
         World.throwableObjects.forEach((bottle) => {
-             //for Each for enemies, dann soll hitWithBottle
             for (let index = 0; index < world.level.enemies.length; index++) {
                 const enemy = world.level.enemies[index];
                 if (bottle.isColliding(enemy)) {
                     enemy.hitWithBottle(enemy);
-                    //this.statusBar.setPercentage(this.character.energy);
+                   this.chickenStatusBar.setPercentage(World.chicken.energy);
                 }
             }
-           
         });
-    //}
 }
 
+checkCollisionWithJump() {
 
+}
 
   checkCollisionsWithCoins() {
     this.coins.forEach((coin) => {
