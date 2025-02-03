@@ -38,7 +38,7 @@ class MovableObject extends DrawableObject {
     //     this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
     // }
 
-    // isColliding(movObj) {    /7am Freitag überrbeitet
+    // isColliding(movObj) {    //am Freitag überrbeitet
     //     return this.x + this.width - this.offset.right > movObj.x + movObj.offset.left &&
     //     this.y + this.height - (this.offset.bottom + this.offset.top) > movObj.y - (movObj.offset.top + movObj.offset.bottom) &&
     //     this.x - this.offset.right < movObj.x + movObj.width - (movObj.offset.left + movObj.offset.right) &&
@@ -52,8 +52,8 @@ class MovableObject extends DrawableObject {
         this.y < movObj.y + movObj.height;
      }
 
-     hitWithBottle(){
-        console.log("Endboss getroffen!");
+     hitWithBottle(hittedEnemy){
+        console.log("Getroffen mit der Flasche!");
      }
     // hit() {
     //     if (this.isColliding (new Chicken())) {

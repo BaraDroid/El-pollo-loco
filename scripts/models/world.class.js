@@ -6,6 +6,7 @@ class World {
   keyboard;
   static bottle;
   static collectedBottles = 0;
+  pepeThrows = false;
   collectedCoins = 0;
   camera_x = 0; //sonst starten wir in der Mitte
   statusBar = new StatusBar();
@@ -79,8 +80,12 @@ class World {
   checkThrownObjects() {
     if (this.keyboard.D && World.collectedBottles > 0) {
       World.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
+      this.pepeThrows = true;
+      console.log(this.pepeThrows);
       World.throwableObjects.push(World.bottle);
       World.collectedBottles--;
+      this.pepeThrows = false;
+      console.log(this.pepeThrows);
       this.bottleBar.setPercentage(World.collectedBottles);
     }
   }
@@ -99,23 +104,40 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         //console.log('Collision with', enemy);
-        this.character.hit();
+        this.character.hit(enemy);
         //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
     });
   }
 
-  checkCollisionsWithThrowableBottles() {
-    if (World.throwableObjects.length > 0) {
-        this.level.enemies.forEach((enemy) => {
-            if (World.throwableObjects[0].isColliding(enemy)) {
-                enemy.hitWithBottle();
-                console.log("Enemy hitted!");
-                //this.statusBar.setPercentage(this.character.energy);
+//   checkCollisionsWithThrowableBottles() {
+//     if (World.throwableObjects.length > 0) {
+//         this.level.enemies.forEach((enemy) => {
+//             if (World.throwableObjects[0].isColliding(enemy)) {
+//                 enemy.hitWithBottle(enemy);
+//                 console.log("Enemy hitted!");
+//                 //this.statusBar.setPercentage(this.character.energy);
+//             }
+//         });
+//     }
+// }
+
+checkCollisionsWithThrowableBottles() {
+   // if (this.pepeThrows == true) {
+        console.log("flasche geworfen");
+        World.throwableObjects.forEach((bottle) => {
+             //for Each for enemies, dann soll hitWithBottle
+            for (let index = 0; index < world.level.enemies.length; index++) {
+                const enemy = world.level.enemies[index];
+                if (bottle.isColliding(enemy)) {
+                    enemy.hitWithBottle(enemy);
+                    //this.statusBar.setPercentage(this.character.energy);
+                }
             }
+           
         });
-    }
+    //}
 }
 
 
