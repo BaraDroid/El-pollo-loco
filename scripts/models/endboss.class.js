@@ -5,6 +5,7 @@ class Endboss extends MovableObject {
     energy = 100;
     chickenDead = false;
     isAlert = false;
+    isAttacking = false;
     offset = {
         top: 150,
         bottom: 200,
@@ -19,7 +20,7 @@ class Endboss extends MovableObject {
         'img_pollo_locco/img/4_enemie_boss_chicken/1_walk/G4.png'
     ];
 
-    IMAGES_ALERTA = [
+    IMAGES_ALERT = [
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G6.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G7.png',
@@ -61,15 +62,34 @@ class Endboss extends MovableObject {
         this.x = 1350; //je größerer Zahl, desto weiter weg steht sie
         this.speed = 0.1 + Math.random()*0.5; //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK);
         this.animate();
     }
 
     animate(){
         setInterval(() => {
-            this.x -= this.speed; //ich will, dass er jetzt steht, erst später läuft er
+             //ich will, dass er jetzt steht, erst später läuft er
+            if (this.isAlert) {
+                this.speed = 0;
+            }
+            this.x -= this.speed;
             }, 1000/60); 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+            if (!this.isAlert) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+            if (this.isAlert) {
+                this.playAnimation(this.IMAGES_ALERT);
+                setTimeout(() => {
+                    this.isAlert = false;
+                    this.speed = 0.1 + Math.random()*0.5;
+                }, 3000);
+            }
+            else if (this.isAttacking) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
+ 
         }, 1000/3); 
     }
 

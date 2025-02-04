@@ -52,7 +52,6 @@ class MovableObject extends DrawableObject {
         this.y < movObj.y + movObj.height;
      }
 
-
     // hit() {
     //     if (this.isColliding (new Chicken())) {
     //         this.energy -= 3;
