@@ -51,6 +51,7 @@ class Endboss extends MovableObject {
     IMAGES_DEAD = [
         'img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G24.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png',
         'img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
@@ -64,6 +65,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
@@ -79,15 +81,26 @@ class Endboss extends MovableObject {
             if (!this.isAlert) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
-            if (this.isAlert) {
-                this.playAnimation(this.IMAGES_ALERT);
+            // if (this.isAlert) {
+            //     this.playAnimation(this.IMAGES_ALERT);
+            //     setTimeout(() => {
+            //         this.isAlert = false;
+            //         this.speed = 0.1 + Math.random()*0.5;
+            //     }, 3000);
+            // }
+            // else if (this.isAttacking) {
+            //     this.playAnimation(this.IMAGES_ATTACK);
+            // }
+            else if (World.chicken.energy == 0) {
+                this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
-                    this.isAlert = false;
-                    this.speed = 0.1 + Math.random()*0.5;
+                    this.loadImage('img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png');
                 }, 3000);
-            }
-            else if (this.isAttacking) {
-                this.playAnimation(this.IMAGES_ATTACK);
+                setInterval(() => {
+                    this.y += 3;    //obrazek se zesune z obrazovky pryc
+                }, 1000/60);
+
+                //a tady si nactu "you won!" obrazovku
             }
  
         }, 1000/3); 

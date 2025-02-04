@@ -1,3 +1,5 @@
+let cloudX = Math.random()*700;
+
 const level1 = new Level(
     [
         new Chicken(),
@@ -7,7 +9,13 @@ const level1 = new Level(
         new Babychicken(),
         new Babychicken()
     ],
-    [new Cloud()],
+    [new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/1.png', cloudX, 0),
+        new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/2.png',cloudX + 720, 0 ),
+        new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/1.png',cloudX + (2 * 720), 0 ),
+        new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/2.png',cloudX + (3 * 720), 0 ),
+        new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/1.png',cloudX + (4 * 720), 0 ),
+        new Cloud('img_pollo_locco/img/5_background/layers/4_clouds/2.png',cloudX + (5 * 720), 0 ),
+    ],
     [
         new BackgroundObject('img_pollo_locco/img/5_background/layers/air.png', -719*2, 0),
         new BackgroundObject('img_pollo_locco/img/5_background/layers/3_third_layer/1.png', -719*2, 0),
