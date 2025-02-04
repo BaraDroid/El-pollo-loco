@@ -21,7 +21,7 @@ class Chicken extends MovableObject {
 
     constructor(){
         super().loadImage('img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-        this.x = 2250 + Math.random()*500;   //slepice vyrazi na 720px, takze kdyz se dostanu za ne, uz me neohrozi
+        this.x = 720 + Math.random()*500;   //slepice vyrazi na 720px, takze kdyz se dostanu za ne, uz me neohrozi
         //225o je konec levelu, ale jak dostanu level do chicken class?
         this.speed = 0.15 + Math.random()*0.5;
         this.loadImages(this.IMAGES_WALKING);
@@ -29,7 +29,6 @@ class Chicken extends MovableObject {
     }
 
     animate(){
-       
         setInterval(() => {
             if(this.chickenDead == false) {
             this.x -= this.speed;
