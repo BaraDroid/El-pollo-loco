@@ -3,11 +3,12 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     energy = 100;
+    chickenDead = false;
     offset = {
-        top: 100,
-        bottom: 130,
-        left: 37,
-        right: 40
+        top: 150,
+        bottom: 200,
+        left: 50,
+        right: 80
     }
 
 
@@ -38,6 +39,12 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 1000/3); 
+    }
+
+    animate() {
+        setInterval(() => {
+            
+        }, 1000/60);
     }
 
 

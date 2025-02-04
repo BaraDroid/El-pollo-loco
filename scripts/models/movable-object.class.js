@@ -73,7 +73,7 @@ class MovableObject extends DrawableObject {
     // }
 
     hit() {
-        this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Leben weg
+        this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
             if (this.isColliding(enemy)) {
                 if (enemy instanceof Chicken) {
                     this.energy -= 3;
@@ -94,7 +94,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    hitWithBottle(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
+    hitEnemy(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
         if (hittedEnemy instanceof Chicken) {
             World.chicken.energy -= 3;
         }

@@ -16,6 +16,8 @@ class Babychicken extends Chicken {
         'img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/3_w.png'
     ];
 
+    IMAGE_DEAD = 'img_pollo_locco/img/3_enemies_chicken/chicken_small/2_dead/dead.png';
+
     constructor() {
         super().loadImage('img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         //this.x = 720 + Math.random()*500;

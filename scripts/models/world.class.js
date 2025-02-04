@@ -74,7 +74,7 @@ class World {
       this.checkThrownObjects();    //method to throw bottles
       this.checkCollisionsWithCoins();  //check collectiong of golden coins
       this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
-      //this.checkCollisionWithJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
+      this.checkCollisionFromJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
     }, 200);
   }
 
@@ -99,7 +99,7 @@ class World {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) && this.character.y > 146 && enemy.chickenDead == false) {
         //console.log('Collision with', enemy);
         this.character.hit(enemy);
         //console.log(this.character.energy);
@@ -109,20 +109,28 @@ class World {
   }
 
 checkCollisionsWithThrowableBottles() { 
-        console.log("flasche geworfen");
         World.throwableObjects.forEach((bottle) => {
             for (let index = 0; index < world.level.enemies.length; index++) {
                 const enemy = world.level.enemies[index];
                 if (bottle.isColliding(enemy)) {
-                    enemy.hitWithBottle(enemy);
+                    enemy.hitEnemy(enemy);
                    this.chickenStatusBar.setPercentage(World.chicken.energy);
                 }
             }
         });
 }
 
-checkCollisionWithJump() {
-
+checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Babychicken ist, da Endboss nicht mit Sprung besiegbar ist
+    world.level.enemies.forEach((enemy) => {
+        if ((enemy instanceof Chicken || enemy instanceof Babychicken) &&
+            this.character.isColliding(enemy) && this.character.y < 147) {
+            enemy.hitEnemy(enemy);  
+            this.chickenStatusBar.setPercentage(World.chicken.energy);
+            console.log("Placata slepice");
+            enemy.chickenDead = true;
+            //enemy.animateItsDead();
+        }
+    });
 }
 
   checkCollisionsWithCoins() {
