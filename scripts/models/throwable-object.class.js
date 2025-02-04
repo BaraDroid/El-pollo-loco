@@ -32,7 +32,6 @@ constructor(x, y) {
     this.x = x;
     this.y = y;
     this.throw();
-    this.animateBrokenBottle();
 }
 
 throw() {
@@ -43,19 +42,5 @@ throw() {
         this.x += 25;
     }, 1000/15);
 }
-
-animateBrokenBottle() {
-    if (this.isColliding(world.level.enemies[0])) {
-        console.log("hier kann die Animation sein");
-        this.playAnimation(IMAGES_BROKEN);
-    }
-}
-
-// playAnimation(images) {
-//     let i = this.currentImage % images.length;
-//         let path = images[i];
-//     this.img = this.imageCache[path];
-//     this.currentImage++;
-// }
 
 }

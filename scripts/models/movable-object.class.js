@@ -97,11 +97,14 @@ class MovableObject extends DrawableObject {
     hitEnemy(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
         if (hittedEnemy instanceof Chicken) {
             World.chicken.energy -= 3;
+            console.log("chicken hit!");
         }
         else if (hittedEnemy instanceof Babychicken) {
+            console.log("Küken hit!");
             World.chicken.energy -= 1;
         }
         else if (hittedEnemy instanceof Endboss) {
+            console.log("Endboss hit!");
             World.chicken.energy -= 5;
         }
         if (World.chicken.energy <0) {

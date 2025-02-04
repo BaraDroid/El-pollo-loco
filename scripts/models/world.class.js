@@ -75,6 +75,7 @@ class World {
       this.checkCollisionsWithCoins();  //check collectiong of golden coins
       this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
       this.checkCollisionFromJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
+      this.checkDistanceToEndboss();  //check the distance and I can put another animation on Endboss
     }, 200);
   }
 
@@ -126,7 +127,6 @@ checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Bab
             this.character.isColliding(enemy) && this.character.y < 147) {
             enemy.hitEnemy(enemy);  
             this.chickenStatusBar.setPercentage(World.chicken.energy);
-            console.log("Placata slepice");
             enemy.chickenDead = true;
             //enemy.animateItsDead();
         }
@@ -141,6 +141,16 @@ checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Bab
         this.coinBar.setPercentage(this.collectedCoins * 5);
       }
     });
+  }
+
+  checkDistanceToEndboss() {
+    if((world.level.enemies[3].x - this.character.x + this.character.width) < 600) {
+        world.level.enemies[3].isAlert = true;
+        console.log(world.level.enemies[3].isAlert);
+    }
+    else {world.level.enemies[3].isAlert = false;
+        console.log(world.level.enemies[3].isAlert);
+    }
   }
 
   draw() {
