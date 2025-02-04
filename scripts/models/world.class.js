@@ -61,6 +61,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.sendNewChicken();
   }
 
   setWorld() {
@@ -115,6 +116,10 @@ checkCollisionsWithThrowableBottles() {
                 const enemy = world.level.enemies[index];
                 if (bottle.isColliding(enemy)) {
                     enemy.hitEnemy(enemy);
+                    console.log(`${bottle} hat stattgefunden`); //das wirft [object object] raus
+                    //bottle.playAnimation(ThrowableObject.IMAGES_BROKEN);
+                        //hier kann er nicht auf  Thr.obj.greifen
+                    
                    this.chickenStatusBar.setPercentage(World.chicken.energy);
                 }
             }
@@ -225,4 +230,15 @@ checkAttackDistance() {
     movObj.x = movObj.x * -1;
     this.ctx.restore(); //wenn das wahr ist, dass wir das Kontext verändert haben, ändern wir das wieder zu dem ursprünglichem Wert
   }
+
+  sendNewChicken() {      //nach 6 Sekunden werden neue Chicken freigelassen
+    setInterval(() => {
+        this.level.enemies.push(new Chicken());
+        console.log("new chicken created");
+        //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
+    }, 6000);
+    setInterval(() => {
+        this.level.enemies.push(new Babychicken());
+    }, 3000);
+}
 }
