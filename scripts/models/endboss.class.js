@@ -6,6 +6,8 @@ class Endboss extends MovableObject {
     chickenDead = false;
     isAlert = false;
     isAttacking = false;
+    alertAnimationShown = false; //Schalter für alert animation, dass sie nur einmal durchgeführt wird
+    alertImageCounter = 0;  //zählt Bilder in der Endanimation, dass sie nur einmal durchgeführt wird
     offset = {
         top: 150,
         bottom: 200,
@@ -60,7 +62,7 @@ class Endboss extends MovableObject {
 
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.x = 1350; //je größerer Zahl, desto weiter weg steht sie
+        this.x = Level.level_end_x; //je größerer Zahl, desto weiter weg steht sie
         this.speed = 0.1 + Math.random()*0.5; //falls das nicht auskommentiert wäre, bewegt er sich nach vorn
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
@@ -72,25 +74,25 @@ class Endboss extends MovableObject {
     animate(){
         setInterval(() => {
              //ich will, dass er jetzt steht, erst später läuft er
-            if (this.isAlert) {
+             if (!this.isAlert) {
+                this.speed = 0.1 + Math.random()*0.5;
+                this.x -= this.speed;
+             }
+            else if (this.isAlert) {
                 this.speed = 0;
             }
-            this.x -= this.speed;
             }, 1000/60); 
         setInterval(() => {
-            if (!this.isAlert) {
+            if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking) {   //pokud tam nebude !is.Attacking, slepice Pepeho i pri kolizi proste prejde
+
                 this.playAnimation(this.IMAGES_WALKING);
             }
-            // if (this.isAlert) {
-            //     this.playAnimation(this.IMAGES_ALERT);
-            //     setTimeout(() => {
-            //         this.isAlert = false;
-            //         this.speed = 0.1 + Math.random()*0.5;
-            //     }, 3000);
-            // }
-            // else if (this.isAttacking) {
-            //     this.playAnimation(this.IMAGES_ATTACK);
-            // }
+            else if (this.isAlert) {
+                this.playAnimation(this.IMAGES_ALERT);
+            }
+            else if (this.isAttacking) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
             else if (World.chicken.energy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {

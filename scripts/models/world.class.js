@@ -145,29 +145,24 @@ checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Bab
 
   checkDistanceToEndboss() {
     this.checkAlertDistance();
-    //this.checkAttackDistance();
+    this.checkAttackDistance();
 
   }
 
   checkAlertDistance() {
-    if((world.level.enemies[3].x - this.character.x + this.character.width) < 500 && !world.level.enemies[3].isAlert) {
+    if((world.level.enemies[3].x - this.character.x + this.character.width) < 500 && !world.level.enemies[3].isAlert && !world.level.enemies[3].alertAnimationShown) {
         console.log("nah genug");
         world.level.enemies[3].isAlert = true;
-        setTimeout(() => {
-            world.level.enemies[3].isAlert = false;
-        }, 3000);
     }
-
   }
 
-  checkAttackDistance() {
-    if ((world.level.enemies[3].x - this.character.x + this.character.width) < 400) {
-        world.level.enemies[3].isAlert = false;
+checkAttackDistance() {
+    if (this.character.isColliding(world.level.enemies[3])) {
+        console.log("attack distance erreicht");
         world.level.enemies[3].isAttacking = true;
     }
-    else {world.level.enemies[3].isAttacking = false;
-    }
-  }
+    else {world.level.enemies[3].isAttacking = false;}
+}
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

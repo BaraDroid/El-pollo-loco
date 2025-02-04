@@ -128,6 +128,14 @@ class MovableObject extends DrawableObject {
             let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+
+        if (this instanceof Endboss && this.isAlert && !this.alertAnimationShown) {
+            this.alertImageCounter++;
+            if(this.alertImageCounter == images.length + 1) {
+                this.alertAnimationShown = true;
+                this.isAlert = false;
+            }
+        }
     }
 
     jump() {
