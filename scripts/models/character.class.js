@@ -6,6 +6,8 @@ class Character extends MovableObject {
     speed = 5;
     world;
     walking_sound = new Audio('audio/footsteps.mp3');
+    lastMoveDate;
+    isSleeping = false;
     offset = {
         top: 120,
         bottom: 140,
@@ -82,16 +84,18 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE_LONG);
         this.applyGravity();
         this.animate();
+       //this.getLastMoveDate(); 
+       //this.checkKeyboardMoves();
     }
 
 
 
     animate(){
-        
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < Level.level_end_x) {
             this.x += this.speed;
             this.otherDirection = false;    //in welche Richtung er gespiegelt wird
+            console.log(`look at this keyborad!`+ this.world.keyboard.RIGHT);
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.x -= this.speed;
@@ -118,14 +122,64 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
             }
 
-            else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 //this.x += this.speed; das muss weg, sonst läuft er weiterhin, auch nach dem Ende, auch wenn das als "gegen Wind" erscheint
                 //walk animation
                 this.walking_sound.play();
             this.playAnimation(this.IMAGES_WALKING);
             }
-        }
+
+            else if (!this.world.keyboard.UP && !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
+                this.playAnimation(this.IMAGES_IDLE);
+                setTimeout(() => {
+                    this.playAnimation(this.IMAGES_IDLE_LONG);
+                }, 3000);
+            }
+
+            // else if (this.sleepModeActivated() == 1) {
+            //     this.playAnimation(this.IMAGES_IDLE);
+            // }
+
+            // else if (this.sleepModeActivated() == 2) {
+            //     this.playAnimation(this.IMAGES_IDLE_LONG);
+            // }
+        
         }, 50);  
 }
+
+sleepModeActivated () {     //returned 1 or 2, put Pepe in short or long sleep after no movements
+    // setInterval(() => {
+    //     if (this.checkKeyboardMoves() && !this.isColliding()) {
+    //         this.lastMoveDate = new Date();
+    //     }
+    // }, 200);
+    //das brauche ich nicht mehr, da ich es immer wieder in getLastMoveDate mache, die wird in constructor aufgerufen
+    let actualDate = new Date();
+    if (actualDate - this.lastMoveDate > 2000) {
+        return 1;
+    }
+    else if (actualDate - lastMoveDate > 5000) {
+        return 2;
+    }
+}
+
+getLastMoveDate() {
+    setInterval(() => {
+        if (this.checkKeyboardMoves() == false) {
+            this.lastMoveDate = new Date();
+        }
+    }, 200);
+    console.log(lastMoveDate);
+}
+
+checkKeyboardMoves() {   //schaut, ob keine von den Tasten gedrückt wurde
+    console.log("hello world");
+    console.log(this.world.keyboard.UP);
+    // return !this.world.keyboard.UP &&
+    //  !this.world.keyboard.LEFT &&
+    //   !this.world.keyboard.RIGHT &&
+    //    !this.world.keyboard.SPACE &&
+    //     !this.world.keyboard.D
+}
+
 }

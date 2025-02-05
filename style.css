@@ -14,7 +14,10 @@ body {
 }
 
 canvas {
-    background-color: black;
+    background-color: rgb(253 254 156);;
+    border: 15px solid rgb(91, 0, 29);
+    border-radius: 20px;
+    border-style: double;
 }
 
 h1 {
@@ -25,3 +28,16 @@ h1 {
   -webkit-text-stroke-color: rgb(250, 247, 221);
   text-shadow: 12px 12px 12px rgb(207, 20, 70);
 }
+
+.overlay {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100dvh;
+}
+
+.overlay img {height: 100dvh; width: calc(100dvw - 15px);}

@@ -233,19 +233,20 @@ checkAttackDistance() {
 
   sendNewChicken() {      //nach 6 Sekunden werden neue Chicken freigelassen
     setInterval(() => {
-        let newX = Level.level_end_x - 720 * Math.random();
+        let newX = Level.level_end_x + 500 + 720 * Math.random();
         let newChicken = new Chicken();
         newChicken.x = newX;
         this.level.enemies.push(newChicken);
         console.log("new chicken created");
         //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
         //a taky bych chtela, aby tady zacinali az vzadu, jinak muzu "obejit" misto jejich zrodu
-    }, 3000);
+    }, 8000);
     setInterval(() => {
         let newX = Level.level_end_x;
         let newBabychicken = new Babychicken();
         newBabychicken.x = newX;
         this.level.enemies.push(newBabychicken);
-    }, 2000);
+    }, 5000);
 }
+
 }
