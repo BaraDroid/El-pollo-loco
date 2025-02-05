@@ -33,6 +33,7 @@ constructor(x, y) {
     this.y = y;
     this.throw();
     this.checkBottleCollision();
+    this.bottleOnGround();
 }
 
 throw() {
@@ -57,6 +58,14 @@ checkBottleCollision() {
         }
     }, 200);
     
+}
+
+bottleOnGround() {
+    setInterval(() => {
+        if(this.y > 147) {
+            this.playAnimation(this.IMAGES_BROKEN);
+        }
+    }, 200);
 }
 // animateCollaps() {  //animation, if bottle is colliding with endboss 
 //     if(this.collapse) {

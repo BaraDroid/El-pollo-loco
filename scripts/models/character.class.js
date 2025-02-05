@@ -5,6 +5,10 @@ class Character extends MovableObject {
     width = 130;
     speed = 5;
     world;
+    isJumping = false;
+    wasHurt = false;
+    imageCounter = 0;
+    jumpAnimationShown = false;
     walking_sound = new Audio('audio/footsteps.mp3');
     offset = {
         top: 120,
@@ -86,8 +90,9 @@ class Character extends MovableObject {
 
 
 
-    animate(){
+animate(){
         setInterval(() => {
+            this.world.camera_x = -this.x + 100;
             if (this.world.keyboard.RIGHT && this.x < Level.level_end_x) {
             this.x += this.speed;
             this.otherDirection = false;    //in welche Richtung er gespiegelt wird
@@ -98,10 +103,9 @@ class Character extends MovableObject {
                 }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.speedY = 15;   //wenn das 30 war, ist er weg von der canvas gesprungen
-                this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
+                this.jump();
+                this.isJumping = true;
             }
-            this.world.camera_x = -this.x + 100;
             }, 1000/60);
 
         setInterval(() => {
@@ -113,11 +117,13 @@ class Character extends MovableObject {
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
-            else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
+                this.wasHurt = false;
             }
 
+            else if (this.isAboveGround() && this.isJumping) {
+                    this.playJumpAnimation(this.IMAGES_JUMPING);
+            }
+            
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 //this.x += this.speed; das muss weg, sonst läuft er weiterhin, auch nach dem Ende, auch wenn das als "gegen Wind" erscheint
                 //walk animation
@@ -125,13 +131,15 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
             }
             
-            else if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
-                this.playAnimation(this.IMAGES_IDLE);
-                setTimeout(() => {
-                    this.playAnimation(this.IMAGES_IDLE_LONG)
-                }, 3000);
-            }
+            // else if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
+            //     this.playAnimation(this.IMAGES_IDLE);
+            //     setTimeout(() => {
+            //         this.playAnimation(this.IMAGES_IDLE_LONG)
+            //     }, 3000);
+            // }
         }, 100);  
+
+
 
 }
 

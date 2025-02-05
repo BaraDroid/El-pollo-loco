@@ -11,9 +11,9 @@ class Coinsbar extends StatusBar {
 
 constructor() {
         super();
+        this.loadImage('img_pollo_locco/img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png');
         this.loadImages(this.IMAGES_BAR);
         this.y = 60;
-        this.setPercentage(100);
     }
 
 

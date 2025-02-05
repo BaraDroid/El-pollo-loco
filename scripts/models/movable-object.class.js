@@ -75,13 +75,13 @@ class MovableObject extends DrawableObject {
         this.world.level.enemies.forEach(enemy => { //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
             if (this.isColliding(enemy)) {
                 if (enemy instanceof Chicken) {
-                    this.energy -= 3;
+                    this.energy -= 1;
                 }
                 else if (enemy instanceof Endboss) {
                     this.energy -= 5;
                 }
                 else if (enemy instanceof Babychicken) {
-                    this.energy -= 1;
+                    this.energy -= 0.5;
                 }
             }
         });
@@ -114,6 +114,7 @@ class MovableObject extends DrawableObject {
 
 
     isHurt() {
+        this.wasHurt = true;
         let timePassed = new Date().getTime() - this.lastHit;   //difference in ms
         timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
         return timePassed < 1;  //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
@@ -129,6 +130,15 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
 
+        // if(this.isJumping && !this.jumpAnimationShown) {
+        //     this.imageCounter++;
+        //     if(this.imageCounter == images.length + 1) {
+        //         this.jumpAnimationShown = true;
+        //         this.isJumping = false;
+        //         console.log("passiert da was?");
+        //     }
+        // }
+
         if (this instanceof Endboss && this.isAlert && !this.alertAnimationShown) {
             this.alertImageCounter++;
             if(this.alertImageCounter == images.length + 1) {
@@ -138,9 +148,24 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    jump() {
-        this.speedY = 30;
+    playJumpAnimation(images) {
+        if(this.isJumping && this.currentImage < images.length + 1){
+            this.playAnimation(images);
+            console.log("playing jump animation");
+            
+        }
+        else {
+            this.isJumping = false;
+            this.currentImage = 0;
+        }
     }
+
+   jump() {
+    this.isJumping = true;
+    this.speedY = 15;   //wenn das 30 war, ist er weg von der canvas gesprungen
+    this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
+    console.log(this.isJumping);
+   }
 
     moveRight() {
 
