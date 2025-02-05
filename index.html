@@ -36,6 +36,7 @@
     <script src="./scripts/game.js"></script>
     
 </head>
+<!-- zde ma byt init() na onload, habe es raus, dass ich stylen kann -->
 <body onload="init()">
 
     <h1>El pollo ¡LOCO!</h1>
@@ -43,8 +44,28 @@
     <canvas id="canvas" width="720" height="480">
     </canvas>   
     
-    <div id="LostGameOverlay" class="overlay">
-        <img src="./img_pollo_locco/img/bg_images/lost_game.webp">
+    <div id="LostGameOverlay" class="overlay_lostgame d_none">
+        <button id="playAgain" class="play_again_btn" onclick="startNewGame()">Play again</button>
+    </div>
+
+    <div class="overlay_startgame d_none">
+        <h1>El pollo ¡LOCO!</h1>
+        <div class="instructions">
+
+            <div class="move">
+                <div class="arrow">
+                    <img src="./img_pollo_locco/icons/arrow_left_icon.png" alt="arrow left">
+                </div>
+                <span>move</span>
+                <div class="arrow">
+                    <img src="./img_pollo_locco/icons/arrow_left_icon.png" alt="arrow left">
+                </div>
+            </div>
+
+            <div class="jump">
+                <div></div>
+            </div>
+        </div>
     </div>
     
 </body>

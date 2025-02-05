@@ -2,6 +2,19 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+function startNewGame() {
+    location.reload();
+}
+
+function getLossScreen() {
+    document.getElementById("LostGameOverlay").classList.remove("d_none");
+    clearAllIntervals();
+}
+
+function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
+
 function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
