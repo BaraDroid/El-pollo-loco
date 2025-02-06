@@ -138,10 +138,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    playJumpAnimation(images) {
+    playJumpAnimation(jumpImages) {
         this.jumpImageCounter++
-        if(this.isJumping && this.jumpImageCounter < images.length + 1){
-            this.playAnimation(images);
+        console.log("is this jumping?", this.isJumping);
+        if(this.isJumping && this.jumpImageCounter < jumpImages.length + 1){
+            console.log("hier soll animiert werden");
+            this.playAnimation(jumpImages);
         }
     }
 
@@ -149,9 +151,8 @@ class MovableObject extends DrawableObject {
         if(!this.sleepAnimationsShown){
             this.playAnimation(images);
              this.sleepImageCounter++;
-             console.log(this.sleepImageCounter);
+             //console.log(this.sleepImageCounter);
              if(this.sleepImageCounter == images.length * 3){
-                console.log("komme ich hier?");
                 this.sleepAnimationShown = true;
                 this.sleepImageCounter = 0;
             }
@@ -175,7 +176,7 @@ class MovableObject extends DrawableObject {
     this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
     if(this.speedY < 0 && this.y > 130)
         this.isJumping = false;
-    console.log("is jumping", this.isJumping);
+    console.log("method jump durchgeführt");
    }
 
     moveRight() {

@@ -106,6 +106,7 @@ animate(){
                 this.sleepImageCounter = 0;
                 this.hurtAnimationShown = false;
 
+
             this.x += this.speed;
             this.otherDirection = false;    //in welche Richtung er gespiegelt wird
             }
@@ -115,21 +116,22 @@ animate(){
                 this.sleepImageCounter = 0;
                 this.hurtAnimationShown = false;
 
+
                 this.x -= this.speed;
                 this.otherDirection = true;
                 }
 
             else if (this.world.keyboard.SPACE && !this.isAboveGround()) {  //isAboveGround gives return back
+                this.jumpImageCounter = 0;
                 this.jump();
-                this.isJumping = true;
                 this.isSleeping = false;
                 this.sleepAnimationShown = false;
                 this.sleepImageCounter = 0;
-                this.jumpImageCounter= 0;
                 this.hurtAnimationShown = false;
             }
             else if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D && !this.sleepAnimationShown && !this.wasHurt){
                 this.isSleeping = true;
+
             }
             }, 1000/60);
 
@@ -138,8 +140,7 @@ animate(){
             this.isWalking = false;
             this.wasHurt = false;
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                getLossScreen();
+                this.playDeadAnimation(this.IMAGES_DEAD);
             }
                 else if (this.isHurt()){
                 this.playHurtAnimation(this.IMAGES_HURT);
@@ -160,12 +161,14 @@ animate(){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }
         }, 100);  
-
-
-
 }
 
-
+playDeadAnimation(imagesDead){
+    this.playAnimation(imagesDead);
+    setTimeout(() => {
+        getLossScreen();
+    }, 1500);
+}
 
 
 }

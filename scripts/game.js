@@ -6,9 +6,13 @@ function startNewGame() {
     location.reload();
 }
 
+function getHomeScreen(){
+    
+}
+
 function getLossScreen() {
-    document.getElementById("LostGameOverlay").classList.remove("d_none");
     clearAllIntervals();
+    document.getElementById("myBody").innerHTML = getLossScreenTemplate();
 }
 
 function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
