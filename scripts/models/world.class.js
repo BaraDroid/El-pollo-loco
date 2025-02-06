@@ -71,13 +71,15 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();   //check, if an enemy touch Pepe
-      this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
       this.checkThrownObjects();    //method to throw bottles
-      this.checkCollisionsWithCoins();  //check collectiong of golden coins
       this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
-      this.checkCollisionFromJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
       this.checkDistanceToEndboss();  //check the distance and I can put another animation on Endboss
     }, 200);
+    setInterval(() => {
+      this.checkCollisionFromJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
+      this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
+      this.checkCollisionsWithCoins();  //check collectiong of golden coins
+    }, 1000/80);
   }
 
   checkThrownObjects() {
@@ -104,6 +106,7 @@ class World {
       if (this.character.isColliding(enemy) && this.character.y > 146 && enemy.chickenDead == false) {
         //console.log('Collision with', enemy);
         this.character.hit(enemy);
+        this.character.isHurt;
         //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
@@ -133,7 +136,6 @@ checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Bab
             enemy.hitEnemy(enemy);  
             this.chickenStatusBar.setPercentage(World.chicken.energy);
             enemy.chickenDead = true;
-            //enemy.animateItsDead();
         }
     });
 }

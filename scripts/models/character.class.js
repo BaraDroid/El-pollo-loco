@@ -7,11 +7,18 @@ class Character extends MovableObject {
     world;
     isJumping = false;
     wasHurt = false;
+    isSleeping = false;
+    isWalking = false;
     imageCounter = 0;
+    sleepImageCounter = 0;
+    sleepAnimationShown = false;
     jumpAnimationShown = false;
+    jumpImageCounter = 0;
+    hurtImageCounter = 0;
+    hurtAnimationShown = false;
     walking_sound = new Audio('audio/footsteps.mp3');
     offset = {
-        top: 120,
+        top: 140,
         bottom: 140,
         left: 30,
         right: 70
@@ -94,49 +101,64 @@ animate(){
         setInterval(() => {
             this.world.camera_x = -this.x + 100;
             if (this.world.keyboard.RIGHT && this.x < Level.level_end_x) {
+                this.isSleeping = false;
+                this.sleepAnimationShown = false;
+                this.sleepImageCounter = 0;
+                this.hurtAnimationShown = false;
+
             this.x += this.speed;
             this.otherDirection = false;    //in welche Richtung er gespiegelt wird
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
+                this.isSleeping = false;
+                this.sleepAnimationShown = false;
+                this.sleepImageCounter = 0;
+                this.hurtAnimationShown = false;
+
                 this.x -= this.speed;
                 this.otherDirection = true;
                 }
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            else if (this.world.keyboard.SPACE && !this.isAboveGround()) {  //isAboveGround gives return back
                 this.jump();
                 this.isJumping = true;
+                this.isSleeping = false;
+                this.sleepAnimationShown = false;
+                this.sleepImageCounter = 0;
+                this.jumpImageCounter= 0;
+                this.hurtAnimationShown = false;
+            }
+            else if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D && !this.sleepAnimationShown && !this.wasHurt){
+                this.isSleeping = true;
             }
             }, 1000/60);
 
         setInterval(() => {
             this.walking_sound.pause();
-
+            this.isWalking = false;
+            this.wasHurt = false;
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 getLossScreen();
             }
-            else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                this.wasHurt = false;
+                else if (this.isHurt()){
+                this.playHurtAnimation(this.IMAGES_HURT);
+                this.hurtAnimationShown = false;
             }
-
             else if (this.isAboveGround() && this.isJumping) {
                     this.playJumpAnimation(this.IMAGES_JUMPING);
-            }
-            
+            }            
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                //this.x += this.speed; das muss weg, sonst läuft er weiterhin, auch nach dem Ende, auch wenn das als "gegen Wind" erscheint
-                //walk animation
                 this.walking_sound.play();
-            this.playAnimation(this.IMAGES_WALKING);
+                this.isWalking = true;
+                this.playAnimation(this.IMAGES_WALKING);
             }
-            
-            // else if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
-            //     this.playAnimation(this.IMAGES_IDLE);
-            //     setTimeout(() => {
-            //         this.playAnimation(this.IMAGES_IDLE_LONG)
-            //     }, 3000);
-            // }
+             else if (this.isSleeping) {
+                this.playSleepingAnimation(this.IMAGES_IDLE);
+            }
+            else if (this.sleepAnimationShown){
+                this.playAnimation(this.IMAGES_IDLE_LONG);
+            }
         }, 100);  
 
 

@@ -31,26 +31,26 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // isColliding(movObj) {    //ursprünglich
-    //     return this.x + this.offset.left + this.width - this.offset.right > movObj.x + movObj.offset.left &&
-    //     this.y + this.offset.top + this.height - this.offset.bottom > movObj.y + movObj.offset.top &&
-    //     this.x + this.offset.left < movObj.x + movObj.offset.left &&
-    //     this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
-    // }
+    isColliding(movObj) {    //ursprünglich
+        return this.x + this.offset.left + this.width - this.offset.right > movObj.x + movObj.offset.left &&
+        this.y + this.offset.top + this.height - this.offset.bottom > movObj.y + movObj.offset.top &&
+        this.x + this.offset.left < movObj.x + movObj.offset.left &&
+        this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
+    }
 
-    // isColliding(movObj) {    //am Freitag überrbeitet
+    // isColliding(movObj) {    //am Freitag überarbeitet
     //     return this.x + this.width - this.offset.right > movObj.x + movObj.offset.left &&
-    //     this.y + this.height - (this.offset.bottom + this.offset.top) > movObj.y - (movObj.offset.top + movObj.offset.bottom) &&
-    //     this.x - this.offset.right < movObj.x + movObj.width - (movObj.offset.left + movObj.offset.right) &&
-    //     this.y + this.offset.top < movObj.y + this.offset.top + movObj.height - this.offset.bottom;
+    //     this.y + this.height - this.offset.bottom > movObj.y + movObj.offset.top &&
+    //     this.x + this.offset.left < movObj.x + movObj.width - movObj.offset.right &&
+    //     this.y + this.offset.top < movObj.y + movObj.height - movObj.offset.bottom;
     // }
 
-    isColliding(movObj) {   //basic
-        return this.x + this.width > movObj.x &&
-        this.y + this.height > movObj.y &&
-        this.x < movObj.x + movObj.width &&
-        this.y < movObj.y + movObj.height;
-     }
+    // isColliding(movObj) {   //basic
+    //     return this.x + this.width > movObj.x &&
+    //     this.y + this.height > movObj.y &&
+    //     this.x < movObj.x + movObj.width &&
+    //     this.y < movObj.y + movObj.height;
+    //  }
 
     // hit() {
     //     if (this.isColliding (new Chicken())) {
@@ -91,6 +91,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        console.log(this.energy);
     }
 
     hitEnemy(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
@@ -114,7 +115,6 @@ class MovableObject extends DrawableObject {
 
 
     isHurt() {
-        this.wasHurt = true;
         let timePassed = new Date().getTime() - this.lastHit;   //difference in ms
         timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
         return timePassed < 1;  //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
@@ -129,16 +129,6 @@ class MovableObject extends DrawableObject {
             let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-
-        // if(this.isJumping && !this.jumpAnimationShown) {
-        //     this.imageCounter++;
-        //     if(this.imageCounter == images.length + 1) {
-        //         this.jumpAnimationShown = true;
-        //         this.isJumping = false;
-        //         console.log("passiert da was?");
-        //     }
-        // }
-
         if (this instanceof Endboss && this.isAlert && !this.alertAnimationShown) {
             this.alertImageCounter++;
             if(this.alertImageCounter == images.length + 1) {
@@ -149,14 +139,33 @@ class MovableObject extends DrawableObject {
     }
 
     playJumpAnimation(images) {
-        if(this.isJumping && this.currentImage < images.length + 1){
+        this.jumpImageCounter++
+        if(this.isJumping && this.jumpImageCounter < images.length + 1){
             this.playAnimation(images);
-            console.log("playing jump animation");
-            
         }
-        else {
-            this.isJumping = false;
-            this.currentImage = 0;
+    }
+
+    playSleepingAnimation(images) {
+        if(!this.sleepAnimationsShown){
+            this.playAnimation(images);
+             this.sleepImageCounter++;
+             console.log(this.sleepImageCounter);
+             if(this.sleepImageCounter == images.length * 3){
+                console.log("komme ich hier?");
+                this.sleepAnimationShown = true;
+                this.sleepImageCounter = 0;
+            }
+        }
+    }
+
+    playHurtAnimation(images){
+        if(!this.hurtAnimationShown){
+            this.playAnimation(images);
+            this.hurtImageCounter++;
+        if(this.hurtImageCounter == images.length + 1){
+            this.hurtAnimationShown = true;
+            this.hurtImageCounter = 0;
+        }
         }
     }
 
@@ -164,7 +173,9 @@ class MovableObject extends DrawableObject {
     this.isJumping = true;
     this.speedY = 15;   //wenn das 30 war, ist er weg von der canvas gesprungen
     this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
-    console.log(this.isJumping);
+    if(this.speedY < 0 && this.y > 130)
+        this.isJumping = false;
+    console.log("is jumping", this.isJumping);
    }
 
     moveRight() {

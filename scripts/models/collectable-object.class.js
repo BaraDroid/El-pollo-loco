@@ -26,7 +26,7 @@ class CollectableObject extends DrawableObject {
     distributeBottles() {
         //this.x = Level.level_end_x - Math.random()*2800;    //x liegt auf dem ganzen Bereich vom ersten Level, wo Pepe rumlaufen kann
         this.x = Math.max(100, Level.level_end_x - Math.random() * Level.level_end_x);
-        this.y = 342 + Math.random() * (400-342);   //y liegt zwischen 342 und 400 px
+        this.y = 342 + Math.random() * (398-342);   //y liegt zwischen 342 und 400 px
     }
 
     //get random image from array
