@@ -1,24 +1,26 @@
-class DrawableObject{
-          //#####################################################
-  //################ attributes ##########################
-  //#####################################################
+class DrawableObject {
     //#####################################################
-  //################ constructor ##########################
-  //#####################################################
+    //################ attributes ##########################
     //#####################################################
-  //################ methods ##########################
-  //#####################################################
+
+    //################ coords ##########################
     x;
     y;
+
+    //################ flags ##########################
+    currentImage = 0; //for imageCache
+
+    //################ others ##########################
     height;
     width;
     img;
     imageCache = {};
-    currentImage = 0;
 
-    
+    //#####################################################
+    //################ methods ##########################
+    //#####################################################
     loadImage(path) {
-        this.img = new Image(); 
+        this.img = new Image();
         this.img.src = path;
     }
 
@@ -26,7 +28,7 @@ class DrawableObject{
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    loadImages(arr){
+    loadImages(arr) {
         arr.forEach(path => {
             let img = new Image();
             img.src = path;
@@ -34,7 +36,8 @@ class DrawableObject{
         });
     }
 
-    drawFrame(ctx) {
+    //################ delete at the end ##########################
+    drawFrame(ctx) {    //draw blue frame, just for visuality, where the image ends
         if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof CollectableObject || this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = "5";
@@ -44,7 +47,7 @@ class DrawableObject{
         }
     }
 
-    drawOffsetFrame(ctx) {
+    drawOffsetFrame(ctx) {  //image with offset - red frame, just for visual control of collisions
         if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof CollectableObject || this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = "5";

@@ -1,22 +1,25 @@
 class Level {
-      //#####################################################
-  //################ attributes ##########################
-  //#####################################################
     //#####################################################
-  //################ constructor ##########################
-  //#####################################################
+    //################ attributes ##########################
     //#####################################################
-  //################ methods ##########################
-  //#####################################################
+
     enemies;
     clouds;
     backgroundObjects;
+    collectableObjects;
+    coins;
 
-    static level_end_x = 2250;
+    //################ static ##########################
+    static level_end_x = 2250; //I can reaach it in every class
 
-    constructor(enemies, clouds, backgroundObjects){
+    //#####################################################
+    //################ constructor ##########################
+    //#####################################################
+    constructor(enemies, clouds, backgroundObjects, collectableObjects, coins) {
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
+        this.collectableObjects = collectableObjects;
+        this.coins = coins;
     }
 }
