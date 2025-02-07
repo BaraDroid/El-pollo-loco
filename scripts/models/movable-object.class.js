@@ -16,8 +16,8 @@ class MovableObject extends DrawableObject {
     //################ methods ##########################
     //#####################################################
 
-      //################ jumping ##########################
-      jump() {
+    //################ jumping ##########################
+    jump() {
         this.isJumping = true;
         this.speedY = 15; //wenn das 30 war, ist er weg von der canvas gesprungen
         this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
@@ -33,7 +33,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
-    isAboveGround() {       
+    isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;    //thr.object should always fall
         } else {
@@ -41,7 +41,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-     //################ collisions ##########################
+    //################ collisions ##########################
     isColliding(movObj) {
         return (
             this.x + this.offset.left + this.width - this.offset.right >
@@ -61,6 +61,7 @@ class MovableObject extends DrawableObject {
     //     this.y < movObj.y + movObj.height;
     //  }
 
+    //################ hits ##########################
     hit() {
         this.world.level.enemies.forEach((enemy) => {
             //jede Enemysorte nimmt unterschiedlicher Anzahl an Energy weg
@@ -97,20 +98,9 @@ class MovableObject extends DrawableObject {
         if (World.chicken.energy < 0) {
             World.chicken.energy = 0;
         }
-        console.log(World.chicken.energy);
     }
 
-    isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; //difference in ms
-        timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
-        return timePassed < 1; //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
-    }
-
-    isDead() {
-        return this.energy == 0; //falls Energie weg ist, gibt uns diese Funktion eine Null raus
-    }
-
-     //################ animation ##########################
+    //################ animation ##########################
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

@@ -178,6 +178,7 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    //################ animations ##########################
     playDeadAnimation(imagesDead) {
         this.playAnimation(imagesDead);
         setTimeout(() => {
@@ -213,5 +214,16 @@ class Character extends MovableObject {
                 this.hurtImageCounter = 0;
             }
         }
+    }
+
+    //################ hurt & dead ##########################
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; //difference in ms
+        timePassed = timePassed / 1000; //damit kriegen wir sekundenraus
+        return timePassed < 1; //also waren wir in letzten 5 Sek getroffen, kommt aus der Funktion TRUE raus
+    }
+
+    isDead() {
+        return this.energy == 0; //falls Energie weg ist, gibt uns diese Funktion eine Null raus
     }
 }
