@@ -113,6 +113,18 @@ class MovableObject extends DrawableObject {
                 this.isAlert = false;
             }
         }
+        else if (this instanceof Endboss && this.chickenDead && !this.deadAnimationShown){
+            this.deadImageCounter++;
+            if(this.deadImageCounter == images.length * 1,5) {
+                this.deadAnimationShown = true;
+                setInterval(() => {
+                    this.y += 3; //obrazek se zesune z obrazovky pryc
+                }, 1000/60);
+                setTimeout(() => {
+                    getWinScreen();
+                }, 2000);
+            }
+        }
     }
 
 

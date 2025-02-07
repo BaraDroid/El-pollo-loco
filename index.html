@@ -39,7 +39,7 @@
     
 </head>
 <!-- zde ma byt init() na onload, habe es raus, dass ich stylen kann -->
-<body id="myBody" onload="init()">
+<body id="myBody" onload="getHomeScreen()">
 
     <h1>El pollo ¡LOCO!</h1>
 
@@ -48,56 +48,7 @@
     
     
 
-    <div class="overlay_startgame d_none">
-        <h1>El pollo ¡LOCO!</h1>
-        <div class="instructions">
-            <span class="game_description">
-                Help the main character, Pepe, win the battle against the chicken army and save the world from the GIANT CHICKEN.
-                Smaller chickens can be defeated either by jumping on them or by throwing a well-aimed bottle of fiery salsa, which you collect throw the game by touch, same as the coins. 
-                But save some of the bottles for the end fight. Boss chicken should be made so hot, that it turns into roast one.
-                Be careful, each encounter with a chicken will cost you some of your precious lives!
-            </span>
-
-            <div class="main">
-                <div class="main_left">
-                    <div class="move">
-                        <div class="arrow">
-                            <img src="./img_pollo_locco/icons/arrow_left_icon.png" alt="arrow left">
-                        </div>
-                        <span>move</span>
-                        <div class="arrow">
-                            <img src="./img_pollo_locco/icons/arrow_right_icon.png" alt="arrow right">
-                        </div>
-                    </div>
-
-                    <div class="jump">
-                        <div class="spacebar">space</div>
-                        <span>jump</span>
-                    </div>
-
-                    <div class="throw">
-                        <div class="d">D</div>
-                        <span>throw</span>
-                    </div>
-                </div>
-            
-
-                <div class="main_right">
-                    <button id="soundBtn">
-                        <img src="./img_pollo_locco/icons/sound_on_icon.png" alt="sound on icon">
-                    </button>
-                    <button id="startGameBtn">START PLAY</button>
-                </div>
-        </div>
-
-        <div class="information">
-            <button>Nutzungsbedingungen & Datenschutz</button>
-            <span>© Barbora Lambeinova</span>
-        </div>
-
-        <div class="icons"></div>
-
-    </div>
+    
     
 </body>
 </html>

@@ -3,11 +3,17 @@ let world;
 let keyboard = new Keyboard();
 
 function startNewGame() {
-    location.reload();
+    document.getElementById("myBody").innerHTML = getCanvasTemplate();
+    init();
 }
 
 function getHomeScreen(){
-    
+    document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
+}
+
+function getWinScreen(){
+    clearAllIntervals();
+    document.getElementById("myBody").innerHTML = getWonScreenTemplate();
 }
 
 function getLossScreen() {

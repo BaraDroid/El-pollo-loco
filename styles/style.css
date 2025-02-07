@@ -46,7 +46,22 @@ h1 {
     align-items: center;
 }
 
-
+.overlay_wingame {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100vw;
+    background-image: url(../img_pollo_locco/img/bg_images/win_screen.webp);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .play_again_btn {
     height: 60px;
@@ -63,27 +78,15 @@ h1 {
     box-shadow: 0 8px 16px 0 #FC0, 0 6px 20px 0 #FC0;
 }
 
+#playAgainWin {
+    margin-top: 0;
+    margin-bottom: 180px;
+}
+
 .play_again_btn:hover {
     background-color: rgba(255, 204, 0, 0.588);
     transition-duration: 0.4s;
     transition-timing-function: ease-in-out
-}
-
-.overlay_startgame {
-    z-index: 10;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    height: 100dvh;
-    width: 100vw;
-    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .instructions {

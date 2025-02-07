@@ -20,9 +20,11 @@ class Endboss extends MovableObject {
     isAlert = false;
     isAttacking = false;
     alertAnimationShown = false; //Schalter für alert animation, dass sie nur einmal durchgeführt wird
+    deadAnimationShown = false;
 
     //################ counter ##########################
     alertImageCounter = 0; //zählt Bilder in der Endanimation, dass sie nur einmal durchgeführt werden
+    deadImageCounter = 0;
 
     //################ images ##########################
     IMAGES_WALKING = [
@@ -103,16 +105,17 @@ class Endboss extends MovableObject {
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (World.chicken.energy == 0) {
+                this.chickenDead = true;
                 this.playAnimation(this.IMAGES_DEAD);
-                setTimeout(() => {
-                    this.loadImage(
-                        "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png"
-                    );
-                }, 3000);
-                setInterval(() => {
-                    this.y += 3; //obrazek se zesune z obrazovky pryc
-                }, 1000 / 60);
+                console.log("Endboss", this.chickenDead);
             }
         }, 1000 / 3);
+
     }
+
+    // endbossDefeated() {
+    //     if(this.chickenDead){
+    //             getWinScreen();
+    //     }
+    // }
 }

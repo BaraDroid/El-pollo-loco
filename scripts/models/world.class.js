@@ -123,8 +123,6 @@ class World {
       this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
       this.checkCollisionsWithCoins(); //check collectiong of golden coins
       this.checkCollisionsWithThrowableBottles(); //checks collisions with salsa bottles, thrown by Pepe
-      
-      //this.checkCollisionBottelEndboss();
     }, 1000 / 80);
   }
 
