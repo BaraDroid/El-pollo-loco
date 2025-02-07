@@ -1,14 +1,14 @@
 @font-face {
     font-family: HVD_Comic_Serif_Pro;
-    src: url(./fonts/HVD_Comic_Serif_Pro.otf);
+    src: url(../fonts/HVD_Comic_Serif_Pro.otf);
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(./img_pollo_locco/img/bg_images/3ef226d7-8082-4d4a-b672-81809f508787.webp);
-    background-size: cover;
+    background-color:rgb(132 9 42);
+    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
     background-position: center;
     font-family: HVD_Comic_Serif_Pro;
 }
@@ -25,8 +25,8 @@ h1 {
     margin-bottom: 8px;
     color: rgb(132 9 42);
     -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: rgb(250, 247, 221);
-  text-shadow: 12px 12px 12px rgb(207, 20, 70);
+    -webkit-text-stroke-color: rgb(250, 247, 221);
+    text-shadow: 12px 12px 12px rgb(207, 20, 70);
 }
 
 .overlay_lostgame {
@@ -38,7 +38,7 @@ h1 {
     bottom: 0;
     height: 100dvh;
     width: 100vw;
-    background-image: url(./img_pollo_locco/img/bg_images/lost_game.webp);
+    background-image: url(../img_pollo_locco/img/bg_images/lost_game.webp);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -78,7 +78,7 @@ h1 {
     bottom: 0;
     height: 100dvh;
     width: 100vw;
-    background-image: url(./img_pollo_locco/img/bg_images/3ef226d7-8082-4d4a-b672-81809f508787.webp);
+    background-image: url(../img_pollo_locco/img/bg_images/game_bg.webp);
     background-size: cover;
     background-position: center;
     display: flex;

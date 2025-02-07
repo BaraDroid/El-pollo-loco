@@ -1,4 +1,13 @@
 class MovableObject extends DrawableObject {
+          //#####################################################
+  //################ attributes ##########################
+  //#####################################################
+    //#####################################################
+  //################ constructor ##########################
+  //#####################################################
+    //#####################################################
+  //################ methods ##########################
+  //#####################################################
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -91,12 +100,11 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        console.log(this.energy);
     }
 
     hitEnemy(hittedEnemy){ //every enemy taky another amount energy away, it´s one energy pool for all enemies
         if (hittedEnemy instanceof Chicken) {
-            World.chicken.energy -= 3;
+            World.chicken.energy -= 1;
             console.log("chicken hit!");
         }
         else if (hittedEnemy instanceof Babychicken) {
@@ -105,7 +113,8 @@ class MovableObject extends DrawableObject {
         }
         else if (hittedEnemy instanceof Endboss) {
             console.log("Endboss hit!");
-            World.chicken.energy -= 5;
+            World.chicken.energy -= 100 / 7;
+            ThrowableObject.collapse = true;
         }
         if (World.chicken.energy <0) {
             World.chicken.energy = 0;
@@ -140,9 +149,7 @@ class MovableObject extends DrawableObject {
 
     playJumpAnimation(jumpImages) {
         this.jumpImageCounter++
-        console.log("is this jumping?", this.isJumping);
         if(this.isJumping && this.jumpImageCounter < jumpImages.length + 1){
-            console.log("hier soll animiert werden");
             this.playAnimation(jumpImages);
         }
     }
@@ -176,7 +183,6 @@ class MovableObject extends DrawableObject {
     this.y = this.speedY; //ursprünglich speedY auf 30 gesetzt, aber wo haben wir speedY initialisiert?
     if(this.speedY < 0 && this.y > 130)
         this.isJumping = false;
-    console.log("method jump durchgeführt");
    }
 
     moveRight() {

@@ -1,4 +1,9 @@
 class World {
+
+  //#####################################################
+  //################ attributes ##########################
+  //#####################################################
+
   character = new Character();
   level = level1;
   static chicken = new Chicken();
@@ -54,6 +59,9 @@ class World {
     new Coins(),
   ];
 
+  //#####################################################
+  //################ constructor ##########################
+  //#####################################################
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -64,6 +72,9 @@ class World {
     this.sendNewChicken();
   }
 
+  //#####################################################
+  //################ methods ##########################
+  //#####################################################
   setWorld() {
     this.character.world = this;
   }
@@ -72,13 +83,15 @@ class World {
     setInterval(() => {
       this.checkCollisions();   //check, if an enemy touch Pepe
       this.checkThrownObjects();    //method to throw bottles
-      this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
       this.checkDistanceToEndboss();  //check the distance and I can put another animation on Endboss
     }, 200);
     setInterval(() => {
       this.checkCollisionFromJump();    //checking, if Pepe jump on Chicken or Babychicken and make them dead
       this.checkCollisionsWithCollectableBottles(); //method for collecting salsa bottles from the ground
       this.checkCollisionsWithCoins();  //check collectiong of golden coins
+      this.checkCollisionsWithThrowableBottles();   //checks collisions with salsa bottles, thrown by Pepe
+      this.checkThrownObjects();    //method to throw bottles
+      //this.checkCollisionBottelEndboss();
     }, 1000/80);
   }
 
@@ -88,7 +101,15 @@ class World {
       World.throwableObjects.push(World.bottle);
       World.collectedBottles--;
       this.bottleBar.setPercentage(World.collectedBottles);
+      // if(World.bottle.hitEnemy(this instanceof Endboss)) {
+      //   ThrowableObject.collapse = true;
+      //   console.log("collapse ist", ThrowableObject.collapse);
+      // }
     }
+  }
+
+  checkCollisionBottelEndboss(){
+    
   }
 
   checkCollisionsWithCollectableBottles() {
@@ -115,14 +136,13 @@ class World {
 
 checkCollisionsWithThrowableBottles() { 
         World.throwableObjects.forEach((bottle) => {
-            for (let index = 0; index < world.level.enemies.length; index++) {
-                const enemy = world.level.enemies[index];
+            for (let index = 0; index < this.level.enemies.length; index++) {
+                const enemy = this.level.enemies[index];
                 if (bottle.isColliding(enemy)) {
+                    //console.log(enemy);
                     enemy.hitEnemy(enemy);
-                    console.log(`${bottle} hat stattgefunden`); //das wirft [object object] raus
-                    //bottle.playAnimation(ThrowableObject.IMAGES_BROKEN);
-                        //hier kann er nicht auf  Thr.obj.greifen
-                    
+                    //ThrowableObject.collapse = true;
+                    //console.log(`collapse ${.collapse} hat stattgefunden`); //das wirft [object object] raus
                    this.chickenStatusBar.setPercentage(World.chicken.energy);
                 }
             }
@@ -130,7 +150,7 @@ checkCollisionsWithThrowableBottles() {
 }
 
 checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Babychicken ist, da Endboss nicht mit Sprung besiegbar ist
-    world.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy) => {
         if ((enemy instanceof Chicken || enemy instanceof Babychicken) &&
             this.character.isColliding(enemy) && this.character.y < 147) {
             enemy.hitEnemy(enemy);  
@@ -157,18 +177,18 @@ checkCollisionFromJump() {  // Überprüfen, ob das 'enemy' ein Chicken oder Bab
   }
 
   checkAlertDistance() {
-    if((world.level.enemies[3].x - this.character.x + this.character.width) < 500 && !world.level.enemies[3].isAlert && !world.level.enemies[3].alertAnimationShown) {
-        console.log("nah genug");
-        world.level.enemies[3].isAlert = true;
+    if((this.level.enemies[3].x - this.character.x + this.character.width) < 500 && !this.level.enemies[3].isAlert && !this.level.enemies[3].alertAnimationShown) {
+        //console.log("nah genug");
+        this.level.enemies[3].isAlert = true;
     }
   }
 
 checkAttackDistance() {
-    if (this.character.isColliding(world.level.enemies[3])) {
-        console.log("attack distance erreicht");
-        world.level.enemies[3].isAttacking = true;
+    if (this.character.isColliding(this.level.enemies[3])) {
+        //console.log("attack distance erreicht");
+        this.level.enemies[3].isAttacking = true;
     }
-    else {world.level.enemies[3].isAttacking = false;}
+    else {this.level.enemies[3].isAttacking = false;}
 }
 
   draw() {
@@ -234,21 +254,21 @@ checkAttackDistance() {
   }
 
   sendNewChicken() {      //nach 6 Sekunden werden neue Chicken freigelassen
-    setInterval(() => {
+    setTimeout(() => {
         let newX = Level.level_end_x + 500 + 720 * Math.random();
         let newChicken = new Chicken();
         newChicken.x = newX;
         this.level.enemies.push(newChicken);
-        console.log("new chicken created");
+        //console.log("new chicken created");
         //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
         //a taky bych chtela, aby tady zacinali az vzadu, jinak muzu "obejit" misto jejich zrodu
-    }, 8000);
-    setInterval(() => {
+    }, 5000);
+    setTimeout(() => {
         let newX = Level.level_end_x;
         let newBabychicken = new Babychicken();
         newBabychicken.x = newX;
         this.level.enemies.push(newBabychicken);
-    }, 5000);
+    }, 3000);
 }
 
 }
