@@ -11,6 +11,14 @@ function getHomeScreen(){
     document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
 }
 
+function getImpressumOverlay() {
+    document.getElementById("myBody").innerHTML = getImpressumTemplates();
+}
+
+function getLegalInformationOverlay() {
+    document.getElementById("myBody").innerHTML = getLegalInformationTemplates();
+}
+
 function getWinScreen(){
     clearAllIntervals();
     document.getElementById("myBody").innerHTML = getWonScreenTemplate();

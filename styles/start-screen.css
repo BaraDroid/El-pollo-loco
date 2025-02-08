@@ -154,10 +154,42 @@
     border-radius: 8px;
 }
 
+#impressum {
+    color:black;
+    background-color:antiquewhite;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-right: 125px;
+}
+
 .information {
     display: flex;
     justify-content: space-evenly;
+    gap: 200px;
     align-items: center;
+}
+
+.control_icons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 16px;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.icon_button {
+    background-color: rgb(158 205 60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.control_icons img {
+    height: 32px;
 }
 
 .d_none {display: none;}
