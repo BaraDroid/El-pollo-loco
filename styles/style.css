@@ -18,6 +18,7 @@ canvas {
     border: 15px solid rgb(91, 0, 29);
     border-radius: 20px;
     border-style: double;
+    display: block;
 }
 
 h1 {
