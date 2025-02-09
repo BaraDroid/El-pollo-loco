@@ -16,6 +16,7 @@ function getHomeScreen(){
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
     clearLevel();
+    clearAllIntervals();
 }
 
 function getImpressumOverlay() {

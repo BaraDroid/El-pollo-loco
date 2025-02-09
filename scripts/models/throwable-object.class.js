@@ -2,10 +2,16 @@ class ThrowableObject extends MovableObject {
     //#####################################################
     //################ attributes ##########################
     //#####################################################
-    height = 60;
-    width = 60;
+    // height = 60;     //ursprungswerte, ich brauche das besser anschauen, deswegen größer
+    // width = 60;
+    height = 120;
+    width = 120;
     accelaration = 5;
+
+    //################ attributes ##########################
     static collapse = false; //wird auf true gesetzt, wenn sich die Flasche zerstören soll
+    brokenBottle = false;
+    brokenAnimationShown = false;
 
     offset = {
         top: 10,
@@ -57,9 +63,31 @@ class ThrowableObject extends MovableObject {
 
     animateCollapse() {
         setInterval(() => {
-            if (this.collapse) {
+            if (ThrowableObject.collapse) {
+                this.brokenBottle = true;  
+                this.acceleration = 0;            
+            }
+            if(this.brokenBottle) {
+                console.log("broken animation");
                 this.playAnimation(this.IMAGES_BROKEN);
             }
         }, 1000 / 80);
     }
+
+    playCollapseAnimation(brokenImages) {
+        if(!this.brokenAnimationShown) {
+
+        }
+    }
+
+    playHurtAnimation(hurtImages) {
+        if(!this.hurtAnimationShown) {
+            this.wasHitImageCounter++;
+            this.playAnimation(hurtImages);
+            if(this.wasHitImageCounter == hurtImages.length + 1){
+                this.wasHit = false;
+                this.hurtAnimationShown = true;
+            }
+        }
+        }
 }

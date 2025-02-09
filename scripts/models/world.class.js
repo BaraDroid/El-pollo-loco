@@ -187,10 +187,9 @@ class World {
       for (let index = 0; index < this.level.enemies.length; index++) {
         const enemy = this.level.enemies[index];
         if (bottle.isColliding(enemy)) {
-          //console.log(enemy);
           enemy.hitEnemy(enemy);
-          //ThrowableObject.collapse = true;
-          //console.log(`collapse ${.collapse} hat stattgefunden`); //das wirft [object object] raus
+          ThrowableObject.collapse = true;
+          console.log("ist collapse true?",ThrowableObject.collapse);
           this.chickenStatusBar.setPercentage(World.chicken.energy);
         }
       }
@@ -220,10 +219,6 @@ class World {
       World.collectedBottles--;
       console.log(World.collectedBottles);
       this.bottleBar.setPercentage(World.collectedBottles);
-      // if(this.bottle.hitEnemy(this instanceof Endboss)) {
-      //   ThrowableObject.collapse = true;
-      //   console.log("collapse ist", ThrowableObject.collapse);
-      // }
     }
   }
 
