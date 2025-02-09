@@ -2,13 +2,20 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
+
 function startNewGame() {
+    document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
     init();
 }
 
 function getHomeScreen(){
+    document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getHomeScreenTemplates();
+    clearLevel();
 }
 
 function getImpressumOverlay() {
@@ -20,24 +27,27 @@ function getLegalInformationOverlay() {
 }
 
 function getWinScreen(){
-    clearAllIntervals();
     document.getElementById("myBody").innerHTML = getWonScreenTemplate();
+    clearLevel();
+    clearAllIntervals();
+    
 }
 
 function getLossScreen() {
-    clearAllIntervals();
     document.getElementById("myBody").innerHTML = getLossScreenTemplate();
+    clearLevel();
+    clearAllIntervals();
 }
 
-function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hintergrund läuft
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  }
+
 
 function init() {   //die bindet unser Canvas an einer Variablen und dann fügen wir das BIld hinzu
+    initLevel();
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
 
     console.log("My Character is", world["character"]);
+    
 }
 
 window.addEventListener('keydown', (event) => {

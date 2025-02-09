@@ -19,12 +19,15 @@ class Endboss extends MovableObject {
     chickenDead = false;
     isAlert = false;
     isAttacking = false;
+    wasHit = false;
     alertAnimationShown = false; //Schalter für alert animation, dass sie nur einmal durchgeführt wird
     deadAnimationShown = false;
+    hurtAnimationShown = false;
 
     //################ counter ##########################
     alertImageCounter = 0; //zählt Bilder in der Endanimation, dass sie nur einmal durchgeführt werden
     deadImageCounter = 0;
+    wasHitImageCounter = 0;
 
     //################ images ##########################
     IMAGES_WALKING = [
@@ -80,6 +83,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
         this.animateEndboss();
     }
 
@@ -88,34 +92,54 @@ class Endboss extends MovableObject {
     //#####################################################
     animateEndboss() {
         setInterval(() => {
-            if (!this.isAlert) {
+            if (!this.isAlert && !this.wasHit) {
                 this.speed = 0.1 + Math.random() * 0.5;
                 this.x -= this.speed;
-            } else if (this.isAlert) {
+            } 
+            else if (this.wasHit && World.chicken.energy > 0) {
+                this.wasHitImageCounter = 0;
+                console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
+            }
+            else if (this.isAlert) {
                 this.speed = 0;
             }
+            else if (World.chicken.energy <= 0) {
+                this.chickenDead = true;
+            }
+            
         }, 1000 / 60);
         setInterval(() => {
-            if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking) {
+            if (!this.isAlert && World.chicken.energy > 0 && !this.isAttacking && this.wasHitImageCounter > 0) {
                 //pokud tam nebude !is.Attacking, slepice Pepeho i pri kolizi proste prejde
-
+                this.hurtAnimationShown = false;
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isAlert) {
+            }
+            else if (this.wasHitImageCounter == 0){
+                console.log("wo bin ich?");
+                this.playHurtAnimation(this.IMAGES_HURT);
+            }
+             else if (this.isAlert) {
                 this.playAnimation(this.IMAGES_ALERT);
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
-            } else if (World.chicken.energy == 0) {
-                this.chickenDead = true;
+            } 
+            
+            else if (this.chickenDead) {
                 this.playAnimation(this.IMAGES_DEAD);
-                console.log("Endboss", this.chickenDead);
             }
-        }, 1000 / 3);
+        }, 350);
 
     }
 
-    // endbossDefeated() {
-    //     if(this.chickenDead){
-    //             getWinScreen();
-    //     }
-    // }
+playHurtAnimation(hurtImages) {
+if(!this.hurtAnimationShown) {
+    this.wasHitImageCounter++;
+    this.playAnimation(hurtImages);
+    if(this.wasHitImageCounter == hurtImages.length + 1){
+        this.wasHit = false;
+        this.hurtAnimationShown = true;
+    }
+}
+}
+
 }

@@ -218,6 +218,7 @@ class World {
       this.bottle = new ThrowableObject(this.character.x + 90, this.character.y + 110);
       World.throwableObjects.push(this.bottle);
       World.collectedBottles--;
+      console.log(World.collectedBottles);
       this.bottleBar.setPercentage(World.collectedBottles);
       // if(this.bottle.hitEnemy(this instanceof Endboss)) {
       //   ThrowableObject.collapse = true;

@@ -3,6 +3,7 @@ class MovableObject extends DrawableObject {
     //################ attributes ##########################
     //#####################################################
 
+
     //################ flags ##########################
     otherDirection = false;
     lastHit = 0;
@@ -42,24 +43,24 @@ class MovableObject extends DrawableObject {
     }
 
     //################ collisions ##########################
-    isColliding(movObj) {
-        return (
-            this.x + this.offset.left + this.width - this.offset.right >
-            movObj.x + movObj.offset.left &&
-            this.y + this.offset.top + this.height - this.offset.bottom >
-            movObj.y + movObj.offset.top &&
-            this.x + this.offset.left < movObj.x + movObj.offset.left &&
-            this.y + this.offset.top <
-            movObj.y + this.offset.top + movObj.height - this.offset.bottom
-        );
-    }
+    // isColliding(movObj) {
+    //     return (
+    //         this.x + this.offset.left + this.width - this.offset.right >
+    //         movObj.x + movObj.offset.left &&
+    //         this.y + this.offset.top + this.height - this.offset.bottom >
+    //         movObj.y + movObj.offset.top &&
+    //         this.x + this.offset.left < movObj.x + movObj.offset.left &&
+    //         this.y + this.offset.top <
+    //         movObj.y + this.offset.top + movObj.height - this.offset.bottom
+    //     );
+    // }
 
-    // isColliding(movObj) {   //basic
-    //     return this.x + this.width > movObj.x &&
-    //     this.y + this.height > movObj.y &&
-    //     this.x < movObj.x + movObj.width &&
-    //     this.y < movObj.y + movObj.height;
-    //  }
+    isColliding(movObj) {   //basic
+        return this.x + this.width > movObj.x &&
+        this.y + this.height > movObj.y &&
+        this.x < movObj.x + movObj.width &&
+        this.y < movObj.y + movObj.height;
+     }
 
     //################ hits ##########################
     hit() {
@@ -91,9 +92,22 @@ class MovableObject extends DrawableObject {
             console.log("Küken hit!");
             World.chicken.energy -= 1;
         } else if (hittedEnemy instanceof Endboss) {
+            //hittedEnemy.wasHit = true;
             console.log("Endboss hit!");
-            World.chicken.energy -= 100 / 7;
-            ThrowableObject.collapse = true;
+            if(hittedEnemy.wasHit == false) {
+                hittedEnemy.wasHit = true;
+                World.chicken.energy -= 20;
+                //console.log(World.chicken.energy);
+                //console.log("was Endboss really hit?", hittedEnemy)
+                setTimeout(() => {
+                    hittedEnemy.wasHit = false;
+                    //console.log("tady by to melo byt znova false", hittedEnemy.wasHit),
+                    hittedEnemy.hurtAnimationShown = false;
+                }, 1000);
+            }
+            else {World.chicken.energy -= 0;
+                //console.log("jetzt hat das nichts abgezogen");
+            }
         }
         if (World.chicken.energy < 0) {
             World.chicken.energy = 0;
