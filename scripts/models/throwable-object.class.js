@@ -12,6 +12,7 @@ class ThrowableObject extends MovableObject {
     static collapse = false; //wird auf true gesetzt, wenn sich die Flasche zerstören soll
     brokenBottle = false;
     brokenAnimationShown = false;
+    brokenAnimationCounter = 0;
 
     offset = {
         top: 10,
@@ -58,36 +59,50 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
             this.x += 25;
+            this.brokenAnimationShown = false;
+            this.brokenAnimationCounter = 0;
         }, 1000 / 15);
     }
 
     animateCollapse() {
         setInterval(() => {
+            console.log("brokenAnimationShown",this.brokenAnimationShown);
+            console.log("brokenAniationCounter", this.brokenAnimationCounter);
             if (ThrowableObject.collapse) {
                 this.brokenBottle = true;  
                 this.acceleration = 0;            
             }
+        }, 1000 / 80);
+        setInterval(() => {
             if(this.brokenBottle) {
                 console.log("broken animation");
-                this.playAnimation(this.IMAGES_BROKEN);
+                this.playCollapseAnimation(this.IMAGES_BROKEN);
             }
-        }, 1000 / 80);
+        }, 200); 
     }
 
     playCollapseAnimation(brokenImages) {
         if(!this.brokenAnimationShown) {
-
-        }
-    }
-
-    playHurtAnimation(hurtImages) {
-        if(!this.hurtAnimationShown) {
-            this.wasHitImageCounter++;
-            this.playAnimation(hurtImages);
-            if(this.wasHitImageCounter == hurtImages.length + 1){
-                this.wasHit = false;
-                this.hurtAnimationShown = true;
+            this.playAnimation(brokenImages); 
+            this.brokenAnimationCounter++
+            console.log("brokenAnimationCOunter in der play methode", this.brokenAnimationCounter); //der geht nicht über eins
+                if(this.brokenAnimationCounter == brokenImages.length +1) {
+                    this.brokenBottle = false;
+                    this.brokenAnimationShown = true;
+                    ThrowableObject.collapse = false;
+                }
             }
         }
-        }
+
+    // playHurtAnimation(hurtImages) {
+    //     if(!this.hurtAnimationShown) {
+    //         this.wasHitImageCounter++;
+    //         this.playAnimation(hurtImages);
+    //         if(this.wasHitImageCounter == hurtImages.length + 1){
+    //             this.wasHit = false;
+    //             this.hurtAnimationShown = true;
+    //         }
+    //     }
+    // }
 }
+

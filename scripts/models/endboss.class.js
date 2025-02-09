@@ -98,7 +98,7 @@ class Endboss extends MovableObject {
             } 
             else if (this.wasHit && World.chicken.energy > 0) {
                 this.wasHitImageCounter = 0;
-                console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
+                //console.log("udaj wasHitImageCounter", this.wasHitImageCounter);
             }
             else if (this.isAlert) {
                 this.speed = 0;

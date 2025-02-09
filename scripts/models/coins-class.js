@@ -7,8 +7,8 @@ class Coins extends CollectableObject {
     x = Math.max(320, Level.level_end_x - Math.random() * Level.level_end_x);
     y = 100 + Math.random() * (200 - 100);
 
-    height = 120;
-    width = 120;
+    height = 140;
+    width = 140;
     offset = {
         top: 45,
         bottom: 90,

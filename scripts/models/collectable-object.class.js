@@ -6,7 +6,7 @@ class CollectableObject extends DrawableObject {
     //################ coords & offset ##########################
     x = Math.max(100, Level.level_end_x - Math.random() * Level.level_end_x);
     y = 342 + Math.random() * (398 - 342);
-    height = 60;
+    height = 80;
     width = 80;
 
     offset = {

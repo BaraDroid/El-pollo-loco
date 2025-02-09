@@ -84,8 +84,8 @@ class World {
     movObj.draw(this.ctx); //jetzt wird Bild eingefügt, wenn if Bedingung true ist, gespiegelt eingefügt
 
     //HIER KOMMT DER RECHTECK, DASS WIR IHM DANACH JEDEM GEBEN KÖNNEN
-    movObj.drawFrame(this.ctx);
-    movObj.drawOffsetFrame(this.ctx);
+    // movObj.drawFrame(this.ctx);
+    // movObj.drawOffsetFrame(this.ctx);
 
     if (movObj.otherDirection) {
       this.flipImageBack(movObj);
@@ -136,13 +136,13 @@ class World {
       //console.log("new chicken created");
       //tady proste do toho arraye v levelu 1 musim nacpat dalsi tri novy chicken. Jen nevim, jak ho ansprechen!
       //a taky bych chtela, aby tady zacinali az vzadu, jinak muzu "obejit" misto jejich zrodu
-    }, 5000);
+    }, 3000);
     setTimeout(() => {
       let newX = Level.level_end_x;
       let newBabychicken = new Babychicken();
       newBabychicken.x = newX;
       this.level.enemies.push(newBabychicken);
-    }, 3000);
+    }, 2000);
   }
 
   //################ collisions ##########################
