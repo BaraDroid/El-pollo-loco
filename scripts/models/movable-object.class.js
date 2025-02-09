@@ -43,24 +43,14 @@ class MovableObject extends DrawableObject {
     }
 
     //################ collisions ##########################
-    // isColliding(movObj) {
-    //     return (
-    //         this.x + this.offset.left + this.width - this.offset.right >
-    //         movObj.x + movObj.offset.left &&
-    //         this.y + this.offset.top + this.height - this.offset.bottom >
-    //         movObj.y + movObj.offset.top &&
-    //         this.x + this.offset.left < movObj.x + movObj.offset.left &&
-    //         this.y + this.offset.top <
-    //         movObj.y + this.offset.top + movObj.height - this.offset.bottom
-    //     );
-    // }
-
-    isColliding(movObj) {   //basic
-        return this.x + this.width > movObj.x &&
-        this.y + this.height > movObj.y &&
-        this.x < movObj.x + movObj.width &&
-        this.y < movObj.y + movObj.height;
-     }
+    isColliding(movObj) {
+        return (
+            this.x + this.offset.left + this.width - this.offset.right > movObj.x + movObj.offset.left &&
+            this.y + this.offset.top + this.height - this.offset.bottom > movObj.y + movObj.offset.top &&
+            this.x + this.offset.left < movObj.x + movObj.offset.left + movObj.width - movObj.offset.right &&
+            this.y + this.offset.top < movObj.y + movObj.offset.top + movObj.height - movObj.offset.bottom
+        );
+    }
 
     //################ hits ##########################
     hit() {
