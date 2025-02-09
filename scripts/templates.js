@@ -94,24 +94,32 @@ function getCanvasTemplate(){
 
 function getImpressumTemplates() {
     return `<div class="impressum_overlay">
-    Impressum
+    <button onclick="getHomeScreen()" class="start_screen_btn">Close</button>
+        <div class="text_part">
+    <h1>Impressum</h1>
+    
+    <h3>Angaben gemäß § 5 TMG (Telemediengesetz)</h3>
+    
+    <h5>Betreiber des Spiels:</h5>
+    <span>
+    Barbora Lambeinova
+    Marktplatz 12
+    86650 Wemding
+    Deutschland
+    </span>
+    <h5>Kontakt:</h5>
+    
+    E-Mail: lambeinovab@seznam.cz
+    
+    <h5>Haftungsausschluss:</h5>
+    
+    Die Inhalte dieses Spiels wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Betreiber des Spiels bin ich gemäß § 7 Abs.1 TMG für eigene Inhalte verantwortlich. Für Inhalte von externen Links übernehme ich keine Haftung, da ich keinen Einfluss auf die Gestaltung und Inhalte der verlinkten Seiten habe.
+    
+    <h5>Urheberrecht:</h5>
+    
+    Die Inhalte und Werke in diesem Spiel unterliegen dem deutschen Urheberrecht. Vervielfältigung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der Zustimmung des jeweiligen Autors.<br>  
+</div>
 
-Angaben gemäß § 5 TMG (Telemediengesetz)
-
-Betreiber des Spiels:
-Barbora Lambeinova
-Marktplatz 12
-86650 Wemding
-Deutschland
-
-Kontakt:
-E-Mail: lambeinovab@seznam.cz
-
-Haftungsausschluss:
-Die Inhalte dieses Spiels wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Betreiber des Spiels bin ich gemäß § 7 Abs.1 TMG für eigene Inhalte verantwortlich. Für Inhalte von externen Links übernehme ich keine Haftung, da ich keinen Einfluss auf die Gestaltung und Inhalte der verlinkten Seiten habe.
-
-Urheberrecht:
-Die Inhalte und Werke in diesem Spiel unterliegen dem deutschen Urheberrecht. Vervielfältigung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der Zustimmung des jeweiligen Autors.
 </div>`;
 }
 

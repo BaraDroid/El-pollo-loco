@@ -9,6 +9,7 @@ function clearAllIntervals() {  //endet alle Intervale, so dass nichts im Hinter
 function startNewGame() {
     document.getElementById("myBody").innerHTML = "";
     document.getElementById("myBody").innerHTML = getCanvasTemplate();
+    clearLevel();
     init();
 }
 

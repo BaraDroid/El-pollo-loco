@@ -99,4 +99,27 @@ h1 {
     border-style: double;
 }
 
+.impressum_overlay {
+    height: fit-content;
+    width: 80dvw;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(253 254 156);;
+    border: 15px solid rgb(91, 0, 29);
+    border-radius: 20px;
+    border-style: double;
+}
+
+.impressum_overlay h1 {
+    margin-top: 0;
+}
+
+.impressum_overlay button {
+    margin-left: 80%;
+}
+
 .d_none {display: none;}
